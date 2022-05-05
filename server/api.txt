@@ -1,0 +1,101 @@
+===Получение КАТЕГОРИЙ товара===
+
+Список категорий - /api/category
+
+type: get
+auth: false
+body: null
+return: category[]
+------------------
+
+===Авторизация===
+
+Регистрация - /api/auth/sign-up
+
+type: post
+body: email, password, gender, name
+desc: register
+return: tokens
+-------------------
+
+Логин - /api/auth/sign-in
+
+type: post
+body: email, password
+desc: login
+return: tokens
+--------------------
+
+Token - /api/auth/token
+
+type: post
+body: refresh_token
+desc: refresh token
+return: tokens
+--------------------
+
+===Product===
+
+Страница товара/ редактирование товара - /api/product/:id
+
+auth: true 
+type: post
+body: product{}
+return: product
+--------------------
+
+Удаление товара - /api/product/:id
+
+auth: true
+type: delete
+body: null
+return: null
+--------------------
+
+Страница ВСЕХ товаров - /api/product/
+
+auth: true
+type: get
+body: null
+return: product[]
+--------------------
+
+Добавление товара - /api/product
+
+auth: true
+type: post
+body: product{}
+return: product
+--------------------
+
+
+
+
+
+// addToBasketAction(productId)
+// removeToBasketAction(productId)
+
+// state = productInBasketIdList: string[]
+
+
+// productInBasketIdList.reduce((result, productId) => {
+  
+// })
+
+// interface IPosition {
+//   productId: string;
+//   count: number;
+//   productName: string;
+//   productPrice: number;
+// }
+
+// type IResult = IPosition[]
+
+
+
+// productInBasketIdList = [1,2,2,2].slice()
+
+// let result:IResult = [
+//    {productId: 1, count: 1, productname, productPrice},
+//    {productId: 2, count: 3, productname, productPrice}
+//   ]

@@ -1,0 +1,25 @@
+.navigation {
+  display: flex;
+  margin: 0 auto;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.navigation__link {
+  display: block;
+  margin: 0 10px 0 0;
+}
+
+.navigation__text {
+  text-decoration: none;
+}
+
+.navigation__text:hover {
+  text-decoration: underline;
+}
+
+.main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

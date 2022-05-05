@@ -1,0 +1,24 @@
+.category-list {
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+}
+
+.category-list__button {
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  margin: 4px;
+  border-radius: 3px;
+  background: rgb(64, 199, 129);
+  transition: 0.2s;
+}
+
+.category-list__button:hover {
+  background: rgb(53, 167, 110);
+}
+
+.category-list__button:active {
+  background: rgb(33, 147, 90);
+  box-shadow: 0 3px rgb(33, 147, 90) inset;
+}
