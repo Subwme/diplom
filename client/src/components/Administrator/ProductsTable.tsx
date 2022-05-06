@@ -1,6 +1,9 @@
 import { deleteProduct } from "../../apiProvider";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { removeProductFromAdminAction } from "../../store/reducers/reducer";
+import {
+  removeProductFromAdminAction,
+  selectEditProductAction,
+} from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
 import "./Adminpanel.css";
 
@@ -18,7 +21,7 @@ export const ProductsTable = ({ product }: { product: IProduct }) => {
   };
 
   const editProduct = (id: string) => {
-    console.log(id);
+    dispatch(selectEditProductAction(id));
   };
 
   const removeProduct = (productId: string) => {

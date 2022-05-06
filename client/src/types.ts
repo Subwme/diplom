@@ -38,3 +38,11 @@ export interface IProduct {
   category: ICategory["_id"];
   _id: string;
 }
+
+export interface IProductData {
+  name: string;
+  category: string;
+  price: number;
+  amount: number;
+  url: string;
+  }

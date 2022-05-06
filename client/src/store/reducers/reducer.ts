@@ -1,4 +1,4 @@
-import { getProductsInBasketIdListFromLocalStorage } from './../../utils';
+import { getProductsInBasketIdListFromLocalStorage } from "./../../utils";
 import { getUserFromLocalStorage } from "../../utils";
 import { ICategory, IProduct, IUser } from "./../../types";
 import {
@@ -15,6 +15,7 @@ import {
   RemoveProductFromBasket,
   AddProductToBasket,
   RemovedProductFromAdmin,
+  SelectEditProduct,
 } from "../types";
 
 const initialState: IState = {
@@ -25,6 +26,7 @@ const initialState: IState = {
   searchText: "",
   selectedCategoryName: null,
   productInBasketIdList: getProductsInBasketIdListFromLocalStorage(),
+  selecteEditProduct: null,
 };
 
 export const reducer = (state = initialState, action: Action): IState => {
@@ -72,10 +74,19 @@ export const reducer = (state = initialState, action: Action): IState => {
       return { ...state, productInBasketIdList: updatedProductInBasketIdList };
     }
     case ActionTypes.RemovedProductFromAdmin: {
-      const updatedProductFromAdminList = state.products.filter((p)=> {
-        return p._id !== action.payload
-      })
-      return {...state, products: updatedProductFromAdminList}
+      const updatedProductFromAdminList = state.products.filter((p) => {
+        return p._id !== action.payload;
+      });
+      return { ...state, products: updatedProductFromAdminList };
+    }
+    case ActionTypes.SelectEditProduct: {
+      const updatedSelectEditProduct = state.products.find(
+        (p) => p._id === action.payload
+      );
+      if (updatedSelectEditProduct === undefined) {
+        return {...state, selecteEditProduct: state.selecteEditProduct}
+      }
+      return {...state, selecteEditProduct: updatedSelectEditProduct}
     }
     default:
       return state;
@@ -131,9 +142,16 @@ export const removeProductFromBasketAction = (
   payload,
 });
 
-export const removeProductFromAdminAction = (payload: string): RemovedProductFromAdmin => ({
+export const removeProductFromAdminAction = (
+  payload: string
+): RemovedProductFromAdmin => ({
   type: ActionTypes.RemovedProductFromAdmin,
-  payload
-})
+  payload,
+});
 
-
+export const selectEditProductAction = (
+  payload: string
+): SelectEditProduct => ({
+  type: ActionTypes.SelectEditProduct,
+  payload,
+});

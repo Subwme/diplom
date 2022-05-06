@@ -1,3 +1,8 @@
+.admin-panel-container {
+  display: flex;
+  justify-content: space-around;
+}
+
 .administrator-table {
   border-radius: 4px;
   border: 1px solid black;
@@ -14,6 +19,14 @@ td {
 th {
   padding: 5px;
   border: 1px solid #000000;
+}
+
+.form-submit-admin__btn {
+  padding: 5px;
+  text-transform: lowercase !important;
+  margin: 0 auto !important;;
+  height: 35px !important;;
+  letter-spacing: 2px !important;;
 }
 
 .edit-btn__btn,
