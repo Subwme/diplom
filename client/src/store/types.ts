@@ -8,7 +8,7 @@ export interface IState {
   searchText: string;
   selectedCategoryName: string | ICategory | null;
   productInBasketIdList: string[];
-  selecteEditProduct: IProduct | null | undefined;
+  selecteEditProduct: string | null;
 }
 
 export enum ActionTypes {
@@ -23,6 +23,7 @@ export enum ActionTypes {
   RemoveProductFromBasket = "remove-product-from-basket",
   RemovedProductFromAdmin = "remove-product-from-admin",
   SelectEditProduct = "select-edit-product",
+  SetUpdateProduct = "set-update-product",
 }
 
 export interface SetUser {
@@ -78,6 +79,11 @@ export interface SelectEditProduct {
   payload: string;
 }
 
+export interface SetUpdateProduct {
+  type: ActionTypes.SetUpdateProduct;
+  payload: IProduct;
+}
+
 export type Action =
   | SetUser
   | SetProducts
@@ -89,4 +95,5 @@ export type Action =
   | AddProductToBasket
   | RemoveProductFromBasket
   | RemovedProductFromAdmin
-  | SelectEditProduct;
+  | SelectEditProduct
+  | SetUpdateProduct;

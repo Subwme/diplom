@@ -16,6 +16,7 @@ import {
   AddProductToBasket,
   RemovedProductFromAdmin,
   SelectEditProduct,
+  SetUpdateProduct,
 } from "../types";
 
 const initialState: IState = {
@@ -80,13 +81,10 @@ export const reducer = (state = initialState, action: Action): IState => {
       return { ...state, products: updatedProductFromAdminList };
     }
     case ActionTypes.SelectEditProduct: {
-      const updatedSelectEditProduct = state.products.find(
-        (p) => p._id === action.payload
-      );
-      if (updatedSelectEditProduct === undefined) {
-        return {...state, selecteEditProduct: state.selecteEditProduct}
-      }
-      return {...state, selecteEditProduct: updatedSelectEditProduct}
+      return { ...state, selecteEditProduct: action.payload };
+    }
+    case ActionTypes.SetUpdateProduct: {
+      return { ...state, products: [...state.products, { ...action.payload }] };
     }
     default:
       return state;
@@ -153,5 +151,12 @@ export const selectEditProductAction = (
   payload: string
 ): SelectEditProduct => ({
   type: ActionTypes.SelectEditProduct,
+  payload,
+});
+
+export const setUpdateProductAction = (
+  payload: IProduct
+): SetUpdateProduct => ({
+  type: ActionTypes.SetUpdateProduct,
   payload,
 });

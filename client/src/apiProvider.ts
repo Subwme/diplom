@@ -39,6 +39,17 @@ export const getProducts = async (): Promise<IProduct[]> => {
   return r.json();
 };
 
+export const updateProduct = async (product: IProduct) => {
+  const r = await fetchWithToken(config.endPoint + `/product/${product._id}`, {
+    method: "POST",
+    body: JSON.stringify(product),
+  });
+  if (!r.ok) {
+    throw new Error();
+  }
+  return r.json();
+};
+
 export const deleteProduct = async (productId: string) => {
   const r = await fetchWithToken(config.endPoint + `/product/${productId}`, {
     method: "DELETE",

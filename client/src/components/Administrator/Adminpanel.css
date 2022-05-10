@@ -10,6 +10,20 @@
   background-color: #8080802b;
 }
 
+.admin-tools {
+  border: 1px solid;
+  border-radius: 4px;
+  margin: 0 10px 0 0;
+  padding: 15px;
+  background-color: gray;
+}
+
+.admin-tools-label-name {
+  color: black;
+  font-weight: 600;
+  text-align: center;
+}
+
 td {
   padding: 5px;
   border: 1px solid #000000;
@@ -24,9 +38,9 @@ th {
 .form-submit-admin__btn {
   padding: 5px;
   text-transform: lowercase !important;
-  margin: 0 auto !important;;
-  height: 35px !important;;
-  letter-spacing: 2px !important;;
+  margin: 0 auto !important;
+  height: 35px !important;
+  letter-spacing: 2px !important;
 }
 
 .edit-btn__btn,
