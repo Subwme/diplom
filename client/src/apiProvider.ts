@@ -43,6 +43,9 @@ export const updateProduct = async (product: IProduct) => {
   const r = await fetchWithToken(config.endPoint + `/product/${product._id}`, {
     method: "POST",
     body: JSON.stringify(product),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   if (!r.ok) {
     throw new Error();

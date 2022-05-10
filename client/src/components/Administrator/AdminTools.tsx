@@ -56,13 +56,13 @@ export const AdminTools = () => {
     if (draft._id !== "") {
       updateProduct(draft)
         .then((product) => {
-          console.log(product);
+          console.log("res", product);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-    console.log(draft);
+    console.log("req", draft);
     // 1. send data to server -> apiProvider
     // 2. added in state -> reducer state
   };
