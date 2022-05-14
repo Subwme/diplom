@@ -3,6 +3,7 @@ import config from "./configServer.json";
 import {
   ICategory,
   ILoginData,
+  INewProduct,
   IProduct,
   IRegisterData,
   IUser,
@@ -31,11 +32,25 @@ export const getCategories = async (): Promise<ICategory[]> => {
   });
   return r.json();
 };
-
+// products methods
 export const getProducts = async (): Promise<IProduct[]> => {
   const r = await fetchWithToken(config.endPoint + "/product", {
     method: "GET",
   });
+  return r.json();
+};
+
+export const addProduct = async (product: INewProduct) => {
+  const r = await fetchWithToken(config.endPoint + "/product", {
+    method: "POST",
+    body: JSON.stringify(product),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!r.ok) {
+    throw new Error();
+  }
   return r.json();
 };
 

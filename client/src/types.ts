@@ -39,6 +39,15 @@ export interface IProduct {
   _id: string;
 }
 
+export interface INewProduct {
+  name: string;
+  price: number;
+  amount: number;
+  description: string;
+  image: string;
+  category: ICategory["_id"];
+}
+
 export interface IProductData {
   name: string;
   category: string;

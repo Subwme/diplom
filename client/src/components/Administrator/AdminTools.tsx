@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { updateProduct } from "../../apiProvider";
+import { addProduct, updateProduct } from "../../apiProvider";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setUpdateProductAction } from "../../store/reducers/reducer";
+import {
+  addedProductAction,
+  setUpdateProductAction,
+} from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
 
 const blank: IProduct = {
@@ -56,15 +59,29 @@ export const AdminTools = () => {
     if (draft._id !== "") {
       updateProduct(draft)
         .then((product) => {
-          console.log("res", product);
+          dispatch(setUpdateProductAction(product));
         })
         .catch((error) => {
           console.log(error);
         });
     }
-    console.log("req", draft);
-    // 1. send data to server -> apiProvider
-    // 2. added in state -> reducer state
+    if (draft._id === "") {
+      const newProduct = {
+        description: draft.description,
+        name: draft.name,
+        category: draft.category,
+        price: draft.price,
+        amount: draft.amount,
+        image: draft.image,
+      };
+      addProduct(newProduct)
+        .then((product) => {
+          dispatch(addedProductAction(product));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const handleChange = (
@@ -132,9 +149,15 @@ export const AdminTools = () => {
           onChange={handleChange}
         />
       </label>
-      <button className="form-submit-admin__btn" type="submit">
-        Отправить
-      </button>
+      {draft._id === "" ? (
+        <button className="form-submit-admin__btn" type="submit">
+          Добавить
+        </button>
+      ) : (
+        <button className="form-submit-admin__btn" type="submit">
+          Сохранить
+        </button>
+      )}
     </form>
   );
 };

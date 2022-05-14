@@ -17,6 +17,7 @@ import {
   RemovedProductFromAdmin,
   SelectEditProduct,
   SetUpdateProduct,
+  AddedProduct,
 } from "../types";
 
 const initialState: IState = {
@@ -83,8 +84,25 @@ export const reducer = (state = initialState, action: Action): IState => {
     case ActionTypes.SelectEditProduct: {
       return { ...state, selecteEditProduct: action.payload };
     }
+    // findIndex and replace product
     case ActionTypes.SetUpdateProduct: {
-      return { ...state, products: [...state.products, { ...action.payload }] };
+      const productIndex = state.products.findIndex(
+        (p) => p._id === action.payload._id
+      );
+      if (productIndex === -1) {
+        return state;
+      }
+      return {
+        ...state,
+        products: [
+          ...state.products.slice(0, productIndex),
+          action.payload,
+          ...state.products.slice(productIndex + 1),
+        ],
+      };
+    }
+    case ActionTypes.AddedProduct: {
+      return { ...state, products: [...state.products, action.payload] };
     }
     default:
       return state;
@@ -158,5 +176,10 @@ export const setUpdateProductAction = (
   payload: IProduct
 ): SetUpdateProduct => ({
   type: ActionTypes.SetUpdateProduct,
+  payload,
+});
+
+export const addedProductAction = (payload: IProduct): AddedProduct => ({
+  type: ActionTypes.AddedProduct,
   payload,
 });

@@ -24,6 +24,7 @@ export enum ActionTypes {
   RemovedProductFromAdmin = "remove-product-from-admin",
   SelectEditProduct = "select-edit-product",
   SetUpdateProduct = "set-update-product",
+  AddedProduct = "add-product",
 }
 
 export interface SetUser {
@@ -84,6 +85,11 @@ export interface SetUpdateProduct {
   payload: IProduct;
 }
 
+export interface AddedProduct {
+  type: ActionTypes.AddedProduct;
+  payload: IProduct;
+}
+
 export type Action =
   | SetUser
   | SetProducts
@@ -96,4 +102,5 @@ export type Action =
   | RemoveProductFromBasket
   | RemovedProductFromAdmin
   | SelectEditProduct
-  | SetUpdateProduct;
+  | SetUpdateProduct
+  | AddedProduct;
