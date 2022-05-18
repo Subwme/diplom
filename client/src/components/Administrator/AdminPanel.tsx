@@ -21,8 +21,8 @@ export const AdminPanel = () => {
               <th>Фото</th>
               <th>Действия</th>
             </tr>
-            {products.map((product) => (
-              <ProductsTable key={product._id} product={product} />
+            {products.map((product, id) => (
+              <ProductsTable key={product._id} product={product} id={id} />
             ))}
           </tbody>
         </table>

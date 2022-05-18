@@ -86,23 +86,31 @@ export const reducer = (state = initialState, action: Action): IState => {
     }
     // findIndex and replace product
     case ActionTypes.SetUpdateProduct: {
-      const productIndex = state.products.findIndex(
-        (p) => p._id === action.payload._id
-      );
-      if (productIndex === -1) {
-        return state;
-      }
-      return {
-        ...state,
-        products: [
-          ...state.products.slice(0, productIndex),
-          action.payload,
-          ...state.products.slice(productIndex + 1),
-        ],
-      };
+      const updatedProduct = action.payload
+      const updatedProducts = state.products.map((p) => {
+        if(p._id === updatedProduct._id) {
+          return updatedProduct
+        }
+        return p
+      })
+      return {...state, products: updatedProducts}
+      // const productIndex = state.products.findIndex(
+      //   (p) => p._id === action.payload._id
+      // );
+      // if (productIndex === -1) {
+      //   return state;
+      // }
+      // return {
+      //   ...state,
+      //   products: [
+      //     ...state.products.slice(0, productIndex),
+      //     action.payload,
+      //     ...state.products.slice(productIndex + 1),
+      //   ],
+      // };
     }
     case ActionTypes.AddedProduct: {
-      return { ...state, products: [...state.products, action.payload] };
+      return { ...state, products: [action.payload, ...state.products] };
     }
     default:
       return state;

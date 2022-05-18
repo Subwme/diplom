@@ -3,6 +3,7 @@ import { addProduct, updateProduct } from "../../apiProvider";
 import { useAppDispatch, useAppSelector } from "../../store";
 import {
   addedProductAction,
+  selectEditProductAction,
   setUpdateProductAction,
 } from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
@@ -89,7 +90,7 @@ export const AdminTools = () => {
   ) => {
     setDraft({ ...draft, [event.target.name]: event.target.value });
   };
-
+  
   return (
     <form className="admin-tools" onSubmit={handleSubmit}>
       <label className="admin-tools-label-name">
@@ -154,9 +155,17 @@ export const AdminTools = () => {
           Добавить
         </button>
       ) : (
-        <button className="form-submit-admin__btn" type="submit">
-          Сохранить
-        </button>
+        <div>
+          <button className="form-submit-admin__btn" type="submit">
+            Сохранить
+          </button>
+          <button
+            onClick={() => dispatch(selectEditProductAction(""))}
+            className="form-cancel-admin__btn"
+          >
+            Отмена
+          </button>
+        </div>
       )}
     </form>
   );

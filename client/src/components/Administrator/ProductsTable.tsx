@@ -7,17 +7,23 @@ import {
 import { IProduct } from "../../types";
 import "./Adminpanel.css";
 
-export const ProductsTable = ({ product }: { product: IProduct }) => {
+export const ProductsTable = ({
+  product,
+  id,
+}: {
+  product: IProduct;
+  id: number;
+}) => {
   const categories = useAppSelector((state) => state.categories);
   const dispatch = useAppDispatch();
   const getCategoryName = (id: string): string | null => {
-    const categoryName = categories.find((c) => {
+    const category = categories.find((c) => {
       return c._id === id;
     });
-    if (categoryName === undefined) {
+    if (category === undefined) {
       return null;
     }
-    return categoryName.name;
+    return category.name;
   };
 
   const editProduct = (id: string) => {
@@ -37,7 +43,7 @@ export const ProductsTable = ({ product }: { product: IProduct }) => {
   return (
     <>
       <tr>
-        <td>{product._id}</td>
+        <td>{id + 1}</td>
         <td>{product.name}</td>
         <td>{getCategoryName(product.category)}</td>
         <td>{product.price}</td>
