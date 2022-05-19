@@ -84,30 +84,15 @@ export const reducer = (state = initialState, action: Action): IState => {
     case ActionTypes.SelectEditProduct: {
       return { ...state, selecteEditProduct: action.payload };
     }
-    // findIndex and replace product
     case ActionTypes.SetUpdateProduct: {
-      const updatedProduct = action.payload
+      const updatedProduct = action.payload;
       const updatedProducts = state.products.map((p) => {
-        if(p._id === updatedProduct._id) {
-          return updatedProduct
+        if (p._id === updatedProduct._id) {
+          return updatedProduct;
         }
-        return p
-      })
-      return {...state, products: updatedProducts}
-      // const productIndex = state.products.findIndex(
-      //   (p) => p._id === action.payload._id
-      // );
-      // if (productIndex === -1) {
-      //   return state;
-      // }
-      // return {
-      //   ...state,
-      //   products: [
-      //     ...state.products.slice(0, productIndex),
-      //     action.payload,
-      //     ...state.products.slice(productIndex + 1),
-      //   ],
-      // };
+        return p;
+      });
+      return { ...state, products: updatedProducts };
     }
     case ActionTypes.AddedProduct: {
       return { ...state, products: [action.payload, ...state.products] };
@@ -117,7 +102,7 @@ export const reducer = (state = initialState, action: Action): IState => {
   }
 };
 
-export const setUserAction = (payload: IUser): SetUser => ({
+export const setUserAction = (payload: IUser | null): SetUser => ({
   type: ActionTypes.SetUser,
   payload,
 });
