@@ -5,7 +5,7 @@ import "./Adminpanel.css";
 
 export const AdminPanel = () => {
   const products = useAppSelector((state) => state.products);
-
+  
   return (
     <div className="admin-panel-container">
       <AdminTools />

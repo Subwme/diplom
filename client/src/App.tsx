@@ -14,6 +14,7 @@ import {
 import { Basket } from "./components/Basket";
 import { AdminPanel } from "./components/Administrator/AdminPanel";
 import "./style.css";
+import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -33,11 +34,13 @@ const App = () => {
 
   return (
     <>
-      <NavigationBar user={user}/>
+      <NavigationBar user={user} />
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/product/:productId" component={ProductCard} />
-        <Route path="/admin" component={AdminPanel} />
+        <ProtectedRoute path="/admin">
+          <AdminPanel />
+        </ProtectedRoute>
         <Route path="/register" component={RegisterForm} />
         <Route path="/login" component={LoginForm} />
         <Route path="/basket" component={Basket} />
