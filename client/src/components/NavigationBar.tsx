@@ -9,6 +9,7 @@ export const NavigationBar = ({ user }: { user: IUser | null }) => {
   const dispath = useAppDispatch();
   const handleChange = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("productInBasketIdList");
     dispath(setUserAction(null));
     history.push("/login");
   };

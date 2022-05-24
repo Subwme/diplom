@@ -11,7 +11,7 @@ import {
   setProductsAction,
   setCategoriesAction,
 } from "./store/reducers/reducer";
-import { Basket } from "./components/Basket";
+import { Basket } from "./components/Basket/Basket";
 import { AdminPanel } from "./components/Administrator/AdminPanel";
 import "./style.css";
 import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
