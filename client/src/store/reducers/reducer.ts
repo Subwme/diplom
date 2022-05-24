@@ -18,6 +18,7 @@ import {
   SelectEditProduct,
   SetUpdateProduct,
   AddedProduct,
+  ClearProductsIdInBasket,
 } from "../types";
 
 const initialState: IState = {
@@ -74,6 +75,9 @@ export const reducer = (state = initialState, action: Action): IState => {
         JSON.stringify(updatedProductInBasketIdList)
       );
       return { ...state, productInBasketIdList: updatedProductInBasketIdList };
+    }
+    case ActionTypes.ClearProductsIdInBasket: {
+      return { ...state, productInBasketIdList: action.payload };
     }
     case ActionTypes.RemovedProductFromAdmin: {
       const updatedProductFromAdminList = state.products.filter((p) => {
@@ -174,5 +178,12 @@ export const setUpdateProductAction = (
 
 export const addedProductAction = (payload: IProduct): AddedProduct => ({
   type: ActionTypes.AddedProduct,
+  payload,
+});
+
+export const clearProductsIdInBasketActiom = (
+  payload: string[]
+): ClearProductsIdInBasket => ({
+  type: ActionTypes.ClearProductsIdInBasket,
   payload,
 });

@@ -1,6 +1,9 @@
 import { Link, useHistory } from "react-router-dom";
 import { useAppDispatch } from "../store";
-import { setUserAction } from "../store/reducers/reducer";
+import {
+  clearProductsIdInBasketActiom,
+  setUserAction,
+} from "../store/reducers/reducer";
 import { IUser } from "../types";
 import "./components.css";
 
@@ -10,6 +13,7 @@ export const NavigationBar = ({ user }: { user: IUser | null }) => {
   const handleChange = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("productInBasketIdList");
+    dispath(clearProductsIdInBasketActiom([]));
     dispath(setUserAction(null));
     history.push("/login");
   };
