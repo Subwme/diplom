@@ -1,6 +1,7 @@
 .admin-panel-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  margin-top: 10%;
 }
 
 .administrator-table {
@@ -13,7 +14,7 @@
 .admin-tools {
   border: 1px solid;
   border-radius: 4px;
-  margin: 0 10px 0 0;
+  margin: 0 40px 0 0;
   padding: 15px;
   background-color: gray;
 }

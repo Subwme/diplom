@@ -1,5 +1,4 @@
 .authentication-form {
-  top: auto;
   margin: 0 auto;
   width: 25%;
   background-color: #0e101c;
@@ -20,4 +19,5 @@
   top: auto;
   width: 100%;
   vertical-align: middle;
+  margin-top: 10%;
 }

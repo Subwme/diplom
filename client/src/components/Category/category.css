@@ -1,6 +1,6 @@
 .category-list {
   display: flex;
-  margin: 10px;
+  margin: 10% 0 0 5%;
   flex-direction: column;
 }
 

@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppDispatch } from "../store";
 import {
   clearProductsIdInBasketActiom,
@@ -8,14 +8,13 @@ import { IUser } from "../types";
 import "./components.css";
 
 export const NavigationBar = ({ user }: { user: IUser | null }) => {
-  const history = useHistory();
   const dispath = useAppDispatch();
-  const handleChange = () => {
+
+  const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("productInBasketIdList");
     dispath(clearProductsIdInBasketActiom([]));
     dispath(setUserAction(null));
-    history.push("/login");
   };
   return (
     <ul className="navigation">
@@ -39,12 +38,13 @@ export const NavigationBar = ({ user }: { user: IUser | null }) => {
             </li>
           )}
           <li className="navigation__link">
-            <select name="user" value={user.name} onChange={handleChange}>
-              <option disabled hidden>
-                {user.name}
-              </option>
-              <option value={user.name}>Logout</option>
-            </select>
+            <Link
+              to="/login"
+              className="navigation__text"
+              onClick={() => logout()}
+            >
+              Logout
+            </Link>
           </li>
         </>
       )}

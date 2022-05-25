@@ -7,7 +7,7 @@ export interface IState {
   sortBy: "asc" | "desc" | null;
   searchText: string;
   selectedCategoryName: string | ICategory | null;
-  productInBasketIdList: string[];
+  productInBasketIdList: string[]
   selecteEditProduct: string | null;
 }
 

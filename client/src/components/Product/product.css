@@ -24,7 +24,8 @@
 }
 
 .product-list__desk {
-  margin: 0 auto;
+  margin: 0 auto 0 -10%;
+  width: 100%;
 }
 
 .product-card__image {

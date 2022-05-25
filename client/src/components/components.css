@@ -1,8 +1,7 @@
 .navigation {
   display: flex;
-  margin: 0 auto;
+  margin: 20px auto 0;
   justify-content: flex-end;
-  margin-bottom: 30px;
 }
 
 .navigation__link {
@@ -12,6 +11,8 @@
 
 .navigation__text {
   text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .navigation__text:hover {
@@ -21,5 +22,5 @@
 .main {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  margin-top: 5%;
 }
