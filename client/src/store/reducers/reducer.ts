@@ -181,7 +181,7 @@ export const addedProductAction = (payload: IProduct): AddedProduct => ({
   payload,
 });
 
-export const clearProductsIdInBasketActiom = (
+export const clearProductsIdInBasketAction = (
   payload: string[]
 ): ClearProductsIdInBasket => ({
   type: ActionTypes.ClearProductsIdInBasket,

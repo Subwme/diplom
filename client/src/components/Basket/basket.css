@@ -1,0 +1,33 @@
+.basket-products {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.basket-btn {
+  border: none;
+  cursor: pointer;
+  margin: 0 auto;
+  background-color: #fa6565;
+}
+
+.basket-product-card {
+  display: flex;
+  flex-wrap: wrap;
+  width: 20%;
+  margin: 0 auto 20px;
+  padding: 15px 0 15px 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #5fbfe6, #5a75e3);
+}
+
+.basket {
+  margin-top: 10%;
+}
+
+.basket-header-text {
+  margin-top: 15%;
+  text-align: center;
+  display: block;
+  font-family: sans-serif;
+}

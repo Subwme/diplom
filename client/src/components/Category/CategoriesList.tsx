@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setSelectedCategoryAction } from "../../store/reducers/reducer";
+import {
+  setSearchTextAction,
+  setSelectedCategoryAction,
+} from "../../store/reducers/reducer";
 
 import "./category.css";
 
@@ -9,6 +12,11 @@ export const CategoriesList = () => {
 
   const handleSelectedCategory = (id: string) => {
     dispatch(setSelectedCategoryAction(id));
+  };
+
+  const clearFilters = () => {
+    dispatch(setSelectedCategoryAction(""));
+    dispatch(setSearchTextAction(""));
   };
   return (
     <div className="category-list">
@@ -21,6 +29,9 @@ export const CategoriesList = () => {
           {category.name}
         </button>
       ))}
+      <button className="category-list-cancel__button" onClick={clearFilters}>
+        Сбросить фильтры
+      </button>
     </div>
   );
 };

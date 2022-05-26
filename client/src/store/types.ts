@@ -18,7 +18,7 @@ export enum ActionTypes {
   SetSortByAsc = "set-sort-by-asc",
   SetSortByDesc = "set-sort-by-desc",
   SetSearchText = "set-search-text",
-  SetSelectedCategory = "set-selected-categry",
+  SetSelectedCategory = "set-selected-category",
   AddProductToBasket = "add-product-to-basket",
   RemoveProductFromBasket = "remove-product-from-basket",
   RemovedProductFromAdmin = "remove-product-from-admin",

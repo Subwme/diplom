@@ -18,7 +18,7 @@ export const Basket = () => {
   }, [] as IProduct[]);
 
   if (productsInBasket.length === 0) {
-    return <span>Корзина пуста</span>;
+    return <span className="basket-header-text">В корзине пока нет товаров.</span>;
   }
 
   return (

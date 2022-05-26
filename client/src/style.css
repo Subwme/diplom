@@ -63,7 +63,7 @@ label {
 button[type="submit"],
 input[type="submit"] {
   background: #263cc1;
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
   color: white;
   text-transform: uppercase;

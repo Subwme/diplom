@@ -90,7 +90,7 @@ export const AdminTools = () => {
   ) => {
     setDraft({ ...draft, [event.target.name]: event.target.value });
   };
-  
+
   return (
     <form className="admin-tools" onSubmit={handleSubmit}>
       <label className="admin-tools-label-name">
@@ -111,18 +111,26 @@ export const AdminTools = () => {
           onChange={handleChange}
         />
       </label>
-      <select name="category" value={draft.category} onChange={handleChange}>
-        <option value={draft.category} disabled hidden>
-          {
-            (
-              categories.find((c) => c._id === draft.category) || {
-                name: "Категория",
-              }
-            ).name
-          }
-        </option>
-        {options}
-      </select>
+      <label className="admin-tools-label-name">
+        Категория
+        <select
+          className="admin-select"
+          name="category"
+          value={draft.category}
+          onChange={handleChange}
+        >
+          <option value={draft.category} disabled hidden>
+            {
+              (
+                categories.find((c) => c._id === draft.category) || {
+                  name: "Категория",
+                }
+              ).name
+            }
+          </option>
+          {options}
+        </select>
+      </label>
       <label className="admin-tools-label-name">
         Стоимость
         <input
@@ -155,7 +163,7 @@ export const AdminTools = () => {
           Добавить
         </button>
       ) : (
-        <div>
+        <div className="admin-tools-btns">
           <button className="form-submit-admin__btn" type="submit">
             Сохранить
           </button>

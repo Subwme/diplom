@@ -8,6 +8,27 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.product-card-page {
+  display: flex;
+  flex-wrap: wrap;
+  width: 20%;
+  margin: 10% auto 20px;
+  padding: 15px 0 15px 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #5fbfe6, #5a75e3);
+}
+
+.product-btns-block {
+  display: flex;
+  margin: 0 auto;
+}
+
+.product-card-btn {
+  display: block;
+  margin: 5px;
+  padding: 5px;
+}
+
 .products {
   display: flex;
   width: 50%;

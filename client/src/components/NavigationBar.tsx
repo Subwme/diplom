@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../store";
 import {
-  clearProductsIdInBasketActiom,
+  clearProductsIdInBasketAction,
   setUserAction,
 } from "../store/reducers/reducer";
 import { IUser } from "../types";
@@ -13,7 +13,7 @@ export const NavigationBar = ({ user }: { user: IUser | null }) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("productInBasketIdList");
-    dispath(clearProductsIdInBasketActiom([]));
+    dispath(clearProductsIdInBasketAction([]));
     dispath(setUserAction(null));
   };
   return (
