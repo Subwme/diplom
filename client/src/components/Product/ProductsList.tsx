@@ -29,7 +29,7 @@ export const ProductsList = () => {
       return product.name.toLowerCase().includes(searchText);
     });
   }
-  
+
   if (sortBy === "asc") {
     sortedProducts = sortedProducts.sort((a, b) => b.price - a.price);
   }
@@ -53,19 +53,20 @@ export const ProductsList = () => {
           type="search"
           placeholder="Search..."
         />
-
-        <button
-          className="sort-desc__button"
-          onClick={() => dispatch(setSortByAscAction())}
-        >
-          High
-        </button>
-        <button
-          className="sort-asc_button"
-          onClick={() => dispatch(setSortByDescAction())}
-        >
-          Low
-        </button>
+        <div className="product-button-list">
+          <button
+            className="sort-desc__button"
+            onClick={() => dispatch(setSortByAscAction())}
+          >
+            High
+          </button>
+          <button
+            className="sort-asc_button"
+            onClick={() => dispatch(setSortByDescAction())}
+          >
+            Low
+          </button>
+        </div>
       </div>
       <div className="products">
         {sortedProducts.map((product) => (

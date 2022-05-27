@@ -60,6 +60,10 @@ th {
 
 }
 
+.form-cancel-admin__btn:hover {
+  background-color: #c21010;
+}
+
 .edit-btn__btn,
 .delete-btn__btn {
   cursor: pointer;

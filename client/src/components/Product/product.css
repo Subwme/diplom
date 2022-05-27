@@ -36,6 +36,11 @@
   margin: 0 auto;
 }
 
+.product-list__input {
+  width: 30%;
+  height: 40px;
+}
+
 .product-filter {
   display: flex;
   flex-wrap: wrap;
@@ -102,11 +107,13 @@
     0 0 1px rgb(86, 96, 106);
 }
 
-.product-list__input {
-  width: 100%;
-}
-
 .navigation-product-card__text {
   text-decoration: none;
   color: currentcolor;
+}
+
+.product-button-list {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
