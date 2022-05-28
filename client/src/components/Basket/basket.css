@@ -14,7 +14,7 @@
 .basket-product-card {
   display: flex;
   flex-wrap: wrap;
-  width: 20%;
+  width: 30%;
   margin: 0 auto 20px;
   padding: 15px 0 15px 0;
   border-radius: 4px;
@@ -30,4 +30,18 @@
   text-align: center;
   display: block;
   font-family: sans-serif;
+}
+
+.basket-form {
+  display: flex;
+  justify-content: center;
+}
+
+.basket-total-form {
+  margin: 10% 0 0 0;
+  height: 0;
+}
+
+.basket-form-buy-btn {
+  cursor: pointer;
 }

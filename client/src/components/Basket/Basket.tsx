@@ -18,17 +18,19 @@ export const Basket = () => {
   }, [] as IProduct[]);
 
   if (productsInBasket.length === 0) {
-    return <span className="basket-header-text">В корзине пока нет товаров.</span>;
+    return (
+      <span className="basket-header-text">В корзине пока нет товаров.</span>
+    );
   }
 
   return (
-    <>
-    <div className="basket">
-      {productsInBasket.map((p, i) => (
-        <BasketProducts key={i + 1} product={p} />
-      ))}
+    <div className="basket-form">
+      <div className="basket">
+        {productsInBasket.map((p, i) => (
+          <BasketProducts key={i + 1} product={p} />
+        ))}
+      </div>
+      <TotalBasketForm product={productsInBasket} />
     </div>
-    <TotalBasketForm product={productsInBasket}/>
-    </>
   );
 };
