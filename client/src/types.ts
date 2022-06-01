@@ -37,6 +37,8 @@ export interface IProduct {
   image: string;
   category: ICategory["_id"];
   _id: string;
+  count?: number;
+  total?: number;
 }
 
 export interface INewProduct {
@@ -54,4 +56,4 @@ export interface IProductData {
   price: number;
   amount: number;
   url: string;
-  }
+}

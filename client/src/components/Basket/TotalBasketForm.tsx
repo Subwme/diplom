@@ -11,7 +11,10 @@ export const TotalBasketForm = (props: IProps) => {
       <div className="basket-total-price">
         К оплате:{" "}
         {productsFromBasket.reduce((total, p) => {
-          return total + p.price;
+          if (p.total === undefined) {
+            return total;
+          }
+          return total + p.total;
         }, 0)}
       </div>
       <button

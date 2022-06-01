@@ -18,9 +18,11 @@ export const BasketProducts = (props: IProps) => {
           alt="Картинка"
         ></img>
         <span className="product-card__name">ID: {props.product._id}</span>
+        <span className="product-card__name">Количество: {props.product.count}</span>
         <span className="product-card__name">Название: {props.product.name}</span>
-        <span className="product-card__name">Количество: {props.product.amount}</span>
+        <span className="product-card__name">На складе: {props.product.amount}</span>
         <span className="product-card__price">Цена: {props.product.price}</span>
+        <span className="product-card__name">Итого: {props.product.total}</span>
         <button
           className="basket-btn"
           onClick={() =>
