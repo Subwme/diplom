@@ -53,6 +53,7 @@ export const reducer = (state = initialState, action: Action): IState => {
         ...state.productInBasketIdList,
         action.payload,
       ];
+      
       // store subscribe
       localStorage.setItem(
         "productInBasketIdList",

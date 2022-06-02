@@ -2,6 +2,7 @@ import { IProduct } from "../../types";
 
 interface IProps {
   product: IProduct[];
+  onBuy: any;
 }
 
 export const TotalBasketForm = (props: IProps) => {
@@ -17,10 +18,7 @@ export const TotalBasketForm = (props: IProps) => {
           return total + p.total;
         }, 0)}
       </div>
-      <button
-        onClick={() => alert(`Спасибо за покупку.`)}
-        className="basket-form-buy-btn"
-      >
+      <button onClick={() => props.onBuy()} className="basket-form-buy-btn">
         Buy
       </button>
     </div>

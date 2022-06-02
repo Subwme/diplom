@@ -29,7 +29,6 @@ export const Basket = () => {
       if (product === undefined) {
         return result;
       }
-
       return [
         ...result,
         {
@@ -41,7 +40,19 @@ export const Basket = () => {
     },
     [] as IProduct[]
   );
-  console.log(productsInBasket);
+
+  const onBuy = (): void => {
+    productsInBasket.forEach((p) => {
+      if (p.count === undefined) {
+        return;
+      }
+      if (p.count > p.amount) {
+        alert (`Вы заказали больше товара ${p.name}, чем есть в магазине`)
+      } else {
+        alert("Спасибо за покупку")
+      }
+    });
+  };
 
   if (productsInBasket.length === 0) {
     return (
@@ -56,7 +67,7 @@ export const Basket = () => {
           <BasketProducts key={i + 1} product={p} />
         ))}
       </div>
-      <TotalBasketForm product={productsInBasket} />
+      <TotalBasketForm product={productsInBasket} onBuy={onBuy} />
     </div>
   );
 };
