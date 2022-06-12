@@ -13,8 +13,8 @@ import {
 } from "./store/reducers/reducer";
 import { Basket } from "./components/Basket/Basket";
 import { AdminPanel } from "./components/Administrator/AdminPanel";
-import "./style.css";
 import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
+import "antd/dist/antd.min.css";
 
 const App = () => {
   const dispatch = useAppDispatch();

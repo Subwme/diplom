@@ -3,7 +3,7 @@ import {
   setSearchTextAction,
   setSelectedCategoryAction,
 } from "../../store/reducers/reducer";
-
+import { Button } from "antd";
 import "./category.css";
 
 export const CategoriesList = () => {
@@ -21,17 +21,15 @@ export const CategoriesList = () => {
   return (
     <div className="category-list">
       {categories.map((category) => (
-        <button
+        <Button
+        className="category-filter-button"
           key={category._id}
-          className="category-list__button"
           onClick={() => handleSelectedCategory(category._id)}
         >
           {category.name}
-        </button>
+        </Button>
       ))}
-      <button className="category-list-cancel__button" onClick={clearFilters}>
-        Сбросить фильтры
-      </button>
+      <Button className="category-filter-button" onClick={clearFilters}>Сбросить фильтры</Button>
     </div>
   );
 };

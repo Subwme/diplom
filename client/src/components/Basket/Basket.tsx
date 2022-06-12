@@ -1,7 +1,8 @@
 import { useAppSelector } from "../../store";
-import { IProduct } from "../../types";
+import { IProduct, NotificationType } from "../../types";
 import { BasketProducts } from "./BasketProducts";
 import { TotalBasketForm } from "./TotalBasketForm";
+import { notification } from "antd";
 
 type ProductIdToCountMap = {
   [id: string]: number;
@@ -41,17 +42,22 @@ export const Basket = () => {
     [] as IProduct[]
   );
 
-  const onBuy = (): void => {
+  const onBuy = (type: NotificationType): void => {
     productsInBasket.forEach((p) => {
       if (p.count === undefined) {
         return;
       }
       if (p.count > p.amount) {
-        alert (`Вы заказали больше товара ${p.name}, чем есть в магазине`)
+        notification["error"]({
+          message: "You must delete one more product",
+        });
       } else {
-        alert("Спасибо за покупку")
+        notification[type]({
+          message: "Thaks for buy!",
+        });
       }
     });
+    
   };
 
   if (productsInBasket.length === 0) {

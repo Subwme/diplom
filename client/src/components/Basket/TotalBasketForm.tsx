@@ -1,4 +1,6 @@
 import { IProduct } from "../../types";
+import { Button } from 'antd';
+
 
 interface IProps {
   product: IProduct[];
@@ -18,9 +20,9 @@ export const TotalBasketForm = (props: IProps) => {
           return total + p.total;
         }, 0)}
       </div>
-      <button onClick={() => props.onBuy()} className="basket-form-buy-btn">
+      <Button type="primary" onClick={() => props.onBuy("success")} >
         Buy
-      </button>
+      </Button>
     </div>
   );
 };

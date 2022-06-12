@@ -1,6 +1,7 @@
 import "./product.css";
 import { IProduct } from "../../types";
 import { Link } from "react-router-dom";
+import { Card, Button } from "antd";
 
 interface IProps {
   product: IProduct;
@@ -8,16 +9,9 @@ interface IProps {
 
 export const Product = (props: IProps) => {
   return (
-    <>
-      <div className="product-card">
-        <img
-          className="product-card__image"
-          src={props.product.image}
-          alt="Картинка"
-        ></img>
-        <span className="product-card__name">{props.product.name}</span>
-        <span className="product-card__price">{props.product.price}</span>
-        <button className="product-card__button">
+      <Card title={props.product.name}>
+        <p>{props.product.price}</p>
+        <Button size="small">
           {
             <Link
               className="navigation-product-card__text"
@@ -26,8 +20,7 @@ export const Product = (props: IProps) => {
               Открыть-карточку
             </Link>
           }
-        </button>
-      </div>
-    </>
+        </Button>
+      </Card>
   );
 };

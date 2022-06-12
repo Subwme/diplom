@@ -49,9 +49,8 @@
   width: 50%;
 }
 
-.product-list__desk {
-  margin: 0 auto 0 -10%;
-  width: 100%;
+.ant-card{
+  margin: 5px !important;
 }
 
 .product-card__image {

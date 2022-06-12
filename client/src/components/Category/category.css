@@ -3,35 +3,15 @@
   margin: 10% 0 0 5%;
   flex-direction: column;
   z-index: 1;
+  padding: 15px;
 }
 
-.category-list__button {
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  padding: 12px;
-  margin: 4px;
-  border-radius: 3px;
-  background: rgb(64, 199, 129);
+.category-filter-button {
+  margin: 5px 0 0 0;
+}
+
+
+.category-filter-button:hover {
+  background-color: aquamarine;
   transition: 0.2s;
-}
-
-.category-list-cancel__button {
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  padding: 12px;
-  margin: 4px;
-  border-radius: 3px;
-  background: rgb(173, 7, 7);
-  transition: 0.2s;
-}
-
-.category-list__button:hover {
-  background: rgb(53, 167, 110);
-}
-
-.category-list__button:active {
-  background: rgb(33, 147, 90);
-  box-shadow: 0 3px rgb(33, 147, 90) inset;
 }

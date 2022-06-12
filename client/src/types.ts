@@ -8,6 +8,8 @@ export interface UserData {
   refreshToken: string;
 }
 
+export type NotificationType = "success";
+
 export interface IRegisterData extends Omit<IUser, "isAdmin"> {
   password: string;
 }
