@@ -1,26 +1,25 @@
 import { ProductsList } from "./Product/ProductsList";
 import { CategoriesList } from "./Category/CategoriesList";
-import { Layout } from "antd";
 import { useAppSelector } from "../store";
 import { useHistory } from "react-router-dom";
+import { Col, Row } from "antd";
 
-const { Sider, Content } = Layout;
 export const Main = () => {
   const user = useAppSelector((state) => state.user);
-  const history = useHistory()
+  const history = useHistory();
 
   if (user === null) {
-    history.replace("/login")
+    history.replace("/login");
   }
 
   return (
-    <Layout>
-      <Sider>
+    <Row>
+      <Col span={3}>
         <CategoriesList />
-      </Sider>
-      <Content>
+      </Col>
+      <Col span={16}>
         <ProductsList />
-      </Content>
-    </Layout>
+      </Col>
+    </Row>
   );
 };

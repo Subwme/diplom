@@ -14,7 +14,11 @@ import {
 import { Basket } from "./components/Basket/Basket";
 import { AdminPanel } from "./components/Administrator/AdminPanel";
 import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
+import { Layout } from "antd";
+
 import "antd/dist/antd.min.css";
+
+const { Content } = Layout;
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -33,19 +37,21 @@ const App = () => {
   }, [dispatch, user]);
 
   return (
-    <>
-      <NavigationBar user={user} />
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/product/:productId" component={ProductCard} />
-        <ProtectedRoute path="/admin">
-          <AdminPanel />
-        </ProtectedRoute>
-        <Route path="/register" component={RegisterForm} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/basket" component={Basket} />
-      </Switch>
-    </>
+    <Layout>
+      <Content>
+        <NavigationBar user={user} />
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/product/:productId" component={ProductCard} />
+          <ProtectedRoute path="/admin">
+            <AdminPanel />
+          </ProtectedRoute>
+          <Route path="/register" component={RegisterForm} />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/basket" component={Basket} />
+        </Switch>
+      </Content>
+    </Layout>
   );
 };
 

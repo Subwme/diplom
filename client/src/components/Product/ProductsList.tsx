@@ -6,7 +6,7 @@ import {
 } from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
 import { Product } from "./Product";
-import { Input, Button, Space } from "antd";
+import { Input, Button, Space, Card } from "antd";
 
 export const ProductsList = () => {
   const products = useAppSelector((state) => state.products);
@@ -45,33 +45,28 @@ export const ProductsList = () => {
   };
 
   return (
-    <div className="product-list__desk">
-      <div className="product-filter">
-        <Space direction="vertical">
+    <>
+      <Space direction="vertical">
         <Input
           allowClear
           size="large"
           onChange={handleSearchTextChange}
           placeholder="Search..."
         />
-        </Space>
-        <div className="product-button-list">
-          <Button type="primary" onClick={() => dispatch(setSortByAscAction())}>
-            High
-          </Button>
-          <Button
-            type="primary"
-            onClick={() => dispatch(setSortByDescAction())}
-          >
-            Low
-          </Button>
-        </div>
-      </div>
+      </Space>
+      <Button type="primary" onClick={() => dispatch(setSortByAscAction())}>
+        High
+      </Button>
+      <Button type="primary" onClick={() => dispatch(setSortByDescAction())}>
+        Low
+      </Button>
       <div className="products">
         {sortedProducts.map((product) => (
-          <Product key={product._id} product={product} />
+          <Card key={product._id} title={product.name}>
+            <Product key={product._id} product={product} />
+          </Card>
         ))}
       </div>
-    </div>
+    </>
   );
 };

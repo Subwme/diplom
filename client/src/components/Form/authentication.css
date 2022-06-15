@@ -7,6 +7,7 @@
 .login-footer-text {
   text-align: center;
   font-family: sans-serif;
+  margin: 20px 0 0 0;
 }
 
 .ant-form-item-control-input {
@@ -16,4 +17,8 @@
 .ant-card-bordered {
   width: 30%;
   margin: 5% auto 0 auto !important;
+}
+
+.ant-layout {
+  height: 100vh;
 }

@@ -5,11 +5,18 @@ import {
   setUserAction,
 } from "../store/reducers/reducer";
 import { IUser } from "../types";
-import { Layout } from "antd";
+import { Menu } from "antd";
+import {
+  HomeOutlined,
+  SettingFilled,
+  ShoppingCartOutlined,
+  LoginOutlined,
+  FormOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import "./components.css";
 
 export const NavigationBar = ({ user }: { user: IUser | null }) => {
-  const { Header } = Layout;
   const dispath = useAppDispatch();
 
   const logout = () => {
@@ -19,55 +26,37 @@ export const NavigationBar = ({ user }: { user: IUser | null }) => {
     dispath(setUserAction(null));
   };
   return (
-    <Layout>
-      <Header>
-        <ul className="navigation">
-          {user && (
-            <>
-              <li className="navigation__link">
-                <Link className="navigation__text" to="/">
-                  Main
-                </Link>
-              </li>
-              <li className="navigation__link">
-                <Link className="navigation__text" to="/basket">
-                  Basket
-                </Link>
-              </li>
-              {user?.isAdmin && (
-                <li className="navigation__link">
-                  <Link className="navigation__text" to="/admin">
-                    Admin
-                  </Link>
-                </li>
-              )}
-              <li className="navigation__link">
-                <Link
-                  to="/login"
-                  className="navigation__text"
-                  onClick={() => logout()}
-                >
-                  Logout
-                </Link>
-              </li>
-            </>
+    <Menu mode="horizontal">
+      {user && (
+        <>
+          <Menu.Item key="home" icon={<HomeOutlined />}>
+            <Link to="/">Main</Link>
+          </Menu.Item>
+          <Menu.Item key="shope" icon={<ShoppingCartOutlined />}>
+            <Link to="/basket">Basket</Link>
+          </Menu.Item>
+          {user?.isAdmin && (
+            <Menu.Item key="admin" icon={<SettingFilled />}>
+              <Link to="/admin">Admin</Link>
+            </Menu.Item>
           )}
-          {!user && (
-            <>
-              <li className="navigation__link">
-                <Link className="navigation__text" to="/register">
-                  Register
-                </Link>
-              </li>
-              <li className="navigation__link">
-                <Link className="navigation__text" to="/login">
-                  Login
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </Header>
-    </Layout>
+          <Menu.Item key="logout" icon={<LogoutOutlined />}>
+            <Link to="/login" onClick={() => logout()}>
+              Logout
+            </Link>
+          </Menu.Item>
+        </>
+      )}
+      {!user && (
+        <>
+          <Menu.Item key="register" icon={<FormOutlined />}>
+            <Link to="/register">Register</Link>
+          </Menu.Item>
+          <Menu.Item  key="login" icon={<LoginOutlined />}>
+            <Link to="/login">Login</Link>
+          </Menu.Item>
+        </>
+      )}
+    </Menu>
   );
 };

@@ -22,14 +22,21 @@ export const CategoriesList = () => {
     <div className="category-list">
       {categories.map((category) => (
         <Button
-        className="category-filter-button"
+          size="small"
+          className="category-filter-button"
           key={category._id}
           onClick={() => handleSelectedCategory(category._id)}
         >
           {category.name}
         </Button>
       ))}
-      <Button className="category-filter-button" onClick={clearFilters}>Сбросить фильтры</Button>
+      <Button
+        size="small"
+        className="category-filter-button"
+        onClick={clearFilters}
+      >
+        Сбросить фильтры
+      </Button>
     </div>
   );
 };
