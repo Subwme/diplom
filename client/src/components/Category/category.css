@@ -1,17 +1,10 @@
-.category-list {
-  display: flex;
-  margin: 10% 0 0 5%;
-  flex-direction: column;
-  z-index: 1;
-  padding: 15px;
+.ant-space.ant-space-vertical.ant-space-align-center {
+  margin: 27% 0px 0px -20%;
 }
-
 .category-filter-button {
-  margin: 5px 0 0 0;
+  margin: 0 0 10px 0;
 }
 
-
-.category-filter-button:hover {
-  background-color: aquamarine;
-  transition: 0.2s;
+.category-list-button {
+ width: 70%;
 }

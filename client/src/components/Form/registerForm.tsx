@@ -75,7 +75,7 @@ const RegisterForm = () => {
       </Card>
 
       <Row>
-        <Col span={12} offset={6}>
+        <Col span={12} offset={0}>
           <h5 className="login-footer-text">
             Welcome to shop! Design by Maksim Krasnikov IT Shcool.
           </h5>

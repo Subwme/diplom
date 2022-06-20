@@ -6,7 +6,8 @@ import {
 } from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
 import { Product } from "./Product";
-import { Input, Button, Space, Card } from "antd";
+import "./product.css"
+import { Input, Button, Space, Col, Row } from "antd";
 
 export const ProductsList = () => {
   const products = useAppSelector((state) => state.products);
@@ -44,29 +45,42 @@ export const ProductsList = () => {
     dispatch(setSearchTextAction(event.target.value.toLowerCase()));
   };
 
+  const data = sortedProducts.map((p) => ({
+    title: p.name,
+    description: p.description,
+    content: p.price,
+    id: p._id,
+    avatar: `http://placeimg.com/200/200/${Math.random() * 100}`,
+  }));
+
   return (
     <>
-      <Space direction="vertical">
-        <Input
-          allowClear
-          size="large"
-          onChange={handleSearchTextChange}
-          placeholder="Search..."
-        />
-      </Space>
-      <Button type="primary" onClick={() => dispatch(setSortByAscAction())}>
-        High
-      </Button>
-      <Button type="primary" onClick={() => dispatch(setSortByDescAction())}>
-        Low
-      </Button>
-      <div className="products">
-        {sortedProducts.map((product) => (
-          <Card key={product._id} title={product.name}>
-            <Product key={product._id} product={product} />
-          </Card>
-        ))}
-      </div>
+      <Row>
+        <Col span={10} offset={0}>
+          <Space direction="horizontal" wrap={true}>
+            <Input
+              allowClear
+              size="large"
+              onChange={handleSearchTextChange}
+              placeholder="Search..."
+            />
+
+            <Button
+              type="primary"
+              onClick={() => dispatch(setSortByAscAction())}
+            >
+              High
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => dispatch(setSortByDescAction())}
+            >
+              Low
+            </Button>
+          </Space>
+        </Col>
+      </Row>
+      <Product data={data} />
     </>
   );
 };

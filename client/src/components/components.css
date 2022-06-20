@@ -1,27 +1,5 @@
-.navigation {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.navigation__link {
-  display: block;
-  margin: 0 10px 0 0;
-}
-
-.navigation__text {
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.navigation__text:hover {
-  text-decoration: underline;
-}
-
-.main {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 5%;
+.ant-row {
+  justify-content: center !important;
 }
 
 .ant-menu-overflow {
@@ -30,4 +8,7 @@
 
 .ant-menu-horizontal {
   background: #f0f2f5 !important;
+}
+.ant-menu-horizontal {
+  margin: 0 0 2% 0 !important;
 }

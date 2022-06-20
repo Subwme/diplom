@@ -3,7 +3,7 @@ import {
   setSearchTextAction,
   setSelectedCategoryAction,
 } from "../../store/reducers/reducer";
-import { Button } from "antd";
+import { Button, Space } from "antd";
 import "./category.css";
 
 export const CategoriesList = () => {
@@ -19,24 +19,28 @@ export const CategoriesList = () => {
     dispatch(setSearchTextAction(""));
   };
   return (
-    <div className="category-list">
-      {categories.map((category) => (
+    <Space direction="vertical" align="center">
+      <div className="category-list-button">
+        {categories.map((category) => (
+          <Button
+            size="middle"
+            className="category-filter-button"
+            key={category._id}
+            onClick={() => handleSelectedCategory(category._id)}
+            block={true}
+          >
+            {category.name}
+          </Button>
+        ))}
         <Button
-          size="small"
+          size="middle"
           className="category-filter-button"
-          key={category._id}
-          onClick={() => handleSelectedCategory(category._id)}
+          onClick={clearFilters}
+          block={true}
         >
-          {category.name}
+          Сбросить фильтры
         </Button>
-      ))}
-      <Button
-        size="small"
-        className="category-filter-button"
-        onClick={clearFilters}
-      >
-        Сбросить фильтры
-      </Button>
-    </div>
+      </div>
+    </Space>
   );
 };

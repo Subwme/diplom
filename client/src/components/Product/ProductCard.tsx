@@ -1,12 +1,15 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addProductToBasketAction } from "../../store/reducers/reducer";
-import { Card, Button, notification } from "antd";
+import { Card, Button, notification, Space, Row, Col } from "antd";
 import { NotificationType } from "../../types";
+import { RollbackOutlined, ShoppingOutlined } from "@ant-design/icons";
+import "./product.css";
 
 interface IProductId {
   productId: string;
 }
+const { Meta } = Card;
 
 export const ProductCard = () => {
   const history = useHistory();
@@ -31,15 +34,42 @@ export const ProductCard = () => {
   };
 
   return (
-    <Card style={{ width: 300, borderRadius: 5, borderColor: "black" }}>
-      <span className="product-card__image">{currentProduct.image}</span>
-      <span className="product-card__name">{currentProduct.name}</span>
-      <span className="product-card__name">{currentProduct.amount}</span>
-      <span className="product-card__price">{currentProduct.price}</span>
-      <div className="product-btns-block">
-        <Button onClick={handleBack}>К списку</Button>
-        <Button onClick={() => handleBuy("success")}>Купить</Button>
-      </div>
-    </Card>
+    <Row>
+      <Col>
+        <Card
+          hoverable
+          style={{ width: 240 }}
+          cover={
+            <img
+              alt="example"
+              src={`http://placeimg.com/200/200/${Math.random() * 100}`}
+            />
+          }
+        >
+          <Meta
+            style={{ margin: 0 }}
+            title={<p>Название: {currentProduct.name}</p>}
+            description={<p>Описание: {currentProduct.description}</p>}
+          />
+          <p>Стоимость:{currentProduct.price}</p>
+          <Space direction="horizontal">
+            <Button
+              icon={<RollbackOutlined />}
+              onClick={handleBack}
+              size="small"
+            >
+              К списку
+            </Button>
+            <Button
+              icon={<ShoppingOutlined />}
+              size="small"
+              onClick={() => handleBuy("success")}
+            >
+              Купить
+            </Button>
+          </Space>
+        </Card>
+      </Col>
+    </Row>
   );
 };

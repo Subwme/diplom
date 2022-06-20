@@ -16,6 +16,7 @@ import { AdminPanel } from "./components/Administrator/AdminPanel";
 import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
 import { Layout } from "antd";
 
+import "./style.css";
 import "antd/dist/antd.min.css";
 
 const { Content } = Layout;

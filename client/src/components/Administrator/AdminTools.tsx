@@ -1,3 +1,5 @@
+import { Button, Card, Col, Form, Input, Row, Select, Space } from "antd";
+import { Option } from "antd/lib/mentions";
 import React, { useState, useEffect } from "react";
 import { addProduct, updateProduct } from "../../apiProvider";
 import { useAppDispatch, useAppSelector } from "../../store";
@@ -7,6 +9,7 @@ import {
   setUpdateProductAction,
 } from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
+import "./Adminpanel.css";
 
 const blank: IProduct = {
   description: "",
@@ -55,8 +58,7 @@ export const AdminTools = () => {
     });
   }, [selectProductFromAdmin]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     if (draft._id !== "") {
       updateProduct(draft)
         .then((product) => {
@@ -86,95 +88,125 @@ export const AdminTools = () => {
   };
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | any
   ) => {
     setDraft({ ...draft, [event.target.name]: event.target.value });
   };
 
   return (
-    <form className="admin-tools" onSubmit={handleSubmit}>
-      <label className="admin-tools-label-name">
-        Наименование
-        <input
-          name="name"
-          type="text"
-          value={draft.name}
-          onChange={handleChange}
-        />
-      </label>
-      <label className="admin-tools-label-name">
-        Описание
-        <input
-          name="description"
-          type="text"
-          value={draft.description}
-          onChange={handleChange}
-        />
-      </label>
-      <label className="admin-tools-label-name">
-        Категория
-        <select
-          className="admin-select"
-          name="category"
-          value={draft.category}
-          onChange={handleChange}
-        >
-          <option value={draft.category} disabled hidden>
-            {
-              (
-                categories.find((c) => c._id === draft.category) || {
-                  name: "Категория",
+    <Space className="admin-tools">
+      <Form
+        onFinish={handleSubmit}
+        name="basic"
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 16 }}
+        autoComplete="off"
+      >
+        <Form.Item label="Наименование">
+          <Input
+            name="name"
+            type="text"
+            value={draft.name}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item label="Описание">
+          <Input
+            name="description"
+            type="text"
+            value={draft.description}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item>
+          {/* <Form.Item name="category">
+              <Select
+              defaultActiveFirstOption={true}
+                defaultValue={
+                  (
+                    categories.find((c) => c._id === draft.category) || {
+                      name: "Категория",
+                    }
+                  ).name
                 }
-              ).name
-            }
-          </option>
-          {options}
-        </select>
-      </label>
-      <label className="admin-tools-label-name">
-        Стоимость
-        <input
-          name="price"
-          type="text"
-          value={draft.price}
-          onChange={handleChange}
-        />
-      </label>
-      <label className="admin-tools-label-name">
-        Кол-во
-        <input
-          name="amount"
-          type="text"
-          value={draft.amount}
-          onChange={handleChange}
-        />
-      </label>
-      <label className="admin-tools-label-name">
-        Изображение
-        <input
-          name="image"
-          type="text"
-          value={draft.image}
-          onChange={handleChange}
-        />
-      </label>
-      {draft._id === "" ? (
-        <button className="form-submit-admin__btn" type="submit">
-          Добавить
-        </button>
-      ) : (
-        <div className="admin-tools-btns">
-          <button className="form-submit-admin__btn" type="submit">
-            Сохранить
-          </button>
-          <button
-            onClick={() => dispatch(selectEditProductAction(""))}
-            className="form-cancel-admin__btn"
+                onChange={handleChange}
+              >
+                {options}
+              </Select>
+            </Form.Item> */}
+          <select
+            className="admin-select"
+            name="category"
+            value={draft.category}
+            onChange={handleChange}
           >
-            Отмена
-          </button>
-        </div>
-      )}
-    </form>
+            <option value={draft.category} disabled hidden>
+              {
+                (
+                  categories.find((c) => c._id === draft.category) || {
+                    name: "Категория",
+                  }
+                ).name
+              }
+            </option>
+            {options}
+          </select>
+        </Form.Item>
+        <Form.Item label="Стоимость">
+          <Input
+            name="price"
+            type="text"
+            value={draft.price}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item label="Количество">
+          <Input
+            name="amount"
+            type="text"
+            value={draft.amount}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item label="Изображение">
+          <Input
+            name="image"
+            type="text"
+            value={draft.image}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        {draft._id === "" ? (
+          <Row>
+            <Col span={10} offset={6}>
+              <Button type="primary" htmlType="submit">
+                Добавить
+              </Button>
+            </Col>
+          </Row>
+        ) : (
+          <div className="admin-tools-button">
+            <Row justify="center">
+              <Col span={24}>
+                <Button
+                  className="admin-tools-btn"
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Сохранить
+                </Button>
+                <Button
+                  type="primary"
+                  onClick={() => dispatch(selectEditProductAction(""))}
+                  danger
+                >
+                  Отмена
+                </Button>
+              </Col>
+            </Row>
+          </div>
+        )}
+      </Form>
+    </Space>
   );
 };

@@ -1,26 +1,36 @@
 import "./product.css";
-import { IProduct } from "../../types";
 import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { List } from "antd";
 
 interface IProps {
-  product: IProduct;
+  title: string;
+  description: string;
+  content: number;
+  id: string;
+  avatar: string;
 }
 
-export const Product = (props: IProps) => {
+export const Product = ({ data }: { data: IProps[] }) => {
+  const count = data.length;
   return (
-    <>
-      <p>{props.product.price}</p>
-      <Button size="small">
-        {
-          <Link
-            className="navigation-product-card__text"
-            to={`/product/${props.product._id}`}
-          >
-            Открыть-карточку
-          </Link>
-        }
-      </Button>
-    </>
+    <List
+      itemLayout="vertical"
+      size="large"
+      pagination={count < 4 ? false : { pageSize: 4 }}
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item
+          key={item.id}
+          actions={[<Link to={`/product/${item.id}`}>Перейти к товару</Link>]}
+          extra={<img width={150} alt="logo" src={item.avatar} />}
+        >
+          <List.Item.Meta
+            title={item.title}
+            description={<p>Описание: {item.description}</p>}
+          />
+          <p>Стоимость: {item.content}</p>
+        </List.Item>
+      )}
+    />
   );
 };
