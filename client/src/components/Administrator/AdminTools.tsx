@@ -1,5 +1,4 @@
-import { Button, Card, Col, Form, Input, Row, Select, Space } from "antd";
-import { Option } from "antd/lib/mentions";
+import { Button, Col, Form, Input, Row, Select, Space } from "antd";
 import React, { useState, useEffect } from "react";
 import { addProduct, updateProduct } from "../../apiProvider";
 import { useAppDispatch, useAppSelector } from "../../store";
@@ -23,40 +22,27 @@ const blank: IProduct = {
 
 export const AdminTools = () => {
   const dispatch = useAppDispatch();
+  const currentProductId = useAppSelector((state) => state.selecteEditProduct);
   const products = useAppSelector((state) => state.products);
   const categories = useAppSelector((state) => state.categories);
   const [draft, setDraft] = useState(blank);
 
-  const selectProductFromAdmin = useAppSelector((state) =>
-    products.find((p) => p._id === state.selecteEditProduct)
-  );
-
-  const options = categories.map((category) => {
-    return (
-      <option value={category._id} key={category._id}>
-        {category.name}
-      </option>
-    );
-  });
-
   useEffect(() => {
-    if (
-      selectProductFromAdmin === null ||
-      selectProductFromAdmin === undefined
-    ) {
+    const currentProduct = products.find((p) => p._id === currentProductId);
+    if (currentProduct === null || currentProduct === undefined) {
       setDraft(blank);
       return;
     }
     setDraft({
-      _id: selectProductFromAdmin._id,
-      description: selectProductFromAdmin.description,
-      name: selectProductFromAdmin.name,
-      category: selectProductFromAdmin.category,
-      price: selectProductFromAdmin.price,
-      amount: selectProductFromAdmin.amount,
-      image: selectProductFromAdmin.image,
+      _id: currentProduct._id,
+      description: currentProduct.description,
+      name: currentProduct.name,
+      category: currentProduct.category,
+      price: currentProduct.price,
+      amount: currentProduct.amount,
+      image: currentProduct.image,
     });
-  }, [selectProductFromAdmin]);
+  }, [currentProductId, products, setDraft]);
 
   const handleSubmit = () => {
     if (draft._id !== "") {
@@ -88,9 +74,13 @@ export const AdminTools = () => {
   };
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | any
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setDraft({ ...draft, [event.target.name]: event.target.value });
+  };
+
+  const handleChangeSelect = (value: string) => {
+    setDraft({ ...draft, category: value });
   };
 
   return (
@@ -118,39 +108,20 @@ export const AdminTools = () => {
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item>
-          {/* <Form.Item name="category">
-              <Select
-              defaultActiveFirstOption={true}
-                defaultValue={
-                  (
-                    categories.find((c) => c._id === draft.category) || {
-                      name: "Категория",
-                    }
-                  ).name
-                }
-                onChange={handleChange}
-              >
-                {options}
-              </Select>
-            </Form.Item> */}
-          <select
-            className="admin-select"
-            name="category"
-            value={draft.category}
-            onChange={handleChange}
-          >
-            <option value={draft.category} disabled hidden>
-              {
-                (
-                  categories.find((c) => c._id === draft.category) || {
-                    name: "Категория",
-                  }
-                ).name
-              }
-            </option>
-            {options}
-          </select>
+        <Form.Item label="Категория">
+            <Select
+              value={draft.category}
+              placeholder="Категория"
+              onChange={handleChangeSelect}
+            >
+              {categories.map((category) => {
+                return (
+                  <Select.Option value={category._id} key={category._id}>
+                    {category.name}
+                  </Select.Option>
+                );
+              })}
+            </Select>
         </Form.Item>
         <Form.Item label="Стоимость">
           <Input

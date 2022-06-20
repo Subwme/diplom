@@ -15,8 +15,8 @@ export const Product = ({ data }: { data: IProps[] }) => {
   return (
     <List
       itemLayout="vertical"
-      size="large"
-      pagination={count < 4 ? false : { pageSize: 4 }}
+      size="small"
+      pagination={count <= 4 ? false : { pageSize: 4 }}
       dataSource={data}
       renderItem={(item) => (
         <List.Item

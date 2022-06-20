@@ -2,6 +2,7 @@ import { useAppSelector } from "../../store";
 import { IProduct, NotificationType } from "../../types";
 import { BasketProducts } from "./BasketProducts";
 import { TotalBasketForm } from "./TotalBasketForm";
+import { Col, Divider, Row } from "antd";
 import { notification } from "antd";
 
 type ProductIdToCountMap = {
@@ -42,7 +43,7 @@ export const Basket = () => {
     [] as IProduct[]
   );
 
-  const onBuy = (type: NotificationType): void => {
+  const onBuy = (type: NotificationType) => {
     productsInBasket.forEach((p) => {
       if (p.count === undefined) {
         return;
@@ -57,23 +58,34 @@ export const Basket = () => {
         });
       }
     });
-    
   };
 
   if (productsInBasket.length === 0) {
     return (
-      <span className="basket-header-text">В корзине пока нет товаров.</span>
+      <Row align="middle">
+        <Divider>В корзине пока нет товаров.</Divider>
+      </Row>
     );
   }
 
+  const data = productsInBasket.map((p) => ({
+    title: p.name,
+    content: p.price,
+    id: p._id,
+    avatar: `http://placeimg.com/200/200/${Math.random() * 100}`,
+    amount: p.amount,
+    count: p.count,
+    total: p.total,
+  }));
+
   return (
-    <div className="basket-form">
-      <div className="basket">
-        {productsInBasket.map((p, i) => (
-          <BasketProducts key={i + 1} product={p} />
-        ))}
-      </div>
-      <TotalBasketForm product={productsInBasket} onBuy={onBuy} />
-    </div>
+    <Row>
+      <Col offset={2}>
+        <BasketProducts data={data} />
+      </Col>
+      <Col offset={2}>
+        <TotalBasketForm product={productsInBasket} onBuy={onBuy} />
+      </Col>
+    </Row>
   );
 };

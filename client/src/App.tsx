@@ -38,6 +38,7 @@ const App = () => {
   }, [dispatch, user]);
 
   return (
+    
     <Layout>
       <Content>
         <NavigationBar user={user} />

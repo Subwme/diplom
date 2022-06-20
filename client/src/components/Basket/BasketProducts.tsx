@@ -1,43 +1,56 @@
 import { useAppDispatch } from "../../store";
 import { removeProductFromBasketAction } from "../../store/reducers/reducer";
-import { IProduct } from "../../types";
-import { Card, Button } from "antd";
+import { Avatar, Button, List, Space } from "antd";
 import "./basket.css";
 
 interface IProps {
-  product: IProduct;
+  title: string;
+  content: number;
+  id: string;
+  avatar: string;
+  amount: number;
+  count?: number;
+  total?: number;
 }
 
-export const BasketProducts = (props: IProps) => {
+export const BasketProducts = ({ data }: { data: IProps[] }) => {
   const dispath = useAppDispatch();
+  const count = data.length;
+  console.log(count);
+  
   return (
-    <div className="basket-products">
-      <Card>
-        <img
-          className="product-card__image"
-          src={props.product.image}
-          alt="Картинка"
-        ></img>
-        <span className="product-card__name">ID: {props.product._id}</span>
-        <span className="product-card__name">
-          Количество: {props.product.count}
-        </span>
-        <span className="product-card__name">
-          Название: {props.product.name}
-        </span>
-        <span className="product-card__name">
-          Доступно в магазине: {props.product.amount}
-        </span>
-        <span className="product-card__price">Цена: {props.product.price}</span>
-        <span className="product-card__name">Итого: {props.product.total}</span>
-        <Button
-          onClick={() =>
-            dispath(removeProductFromBasketAction(props.product._id))
-          }
-        >
-          delete
-        </Button>
-      </Card>
-    </div>
+    <>
+      <List
+        itemLayout="horizontal"
+        size="large"
+        pagination={count <= 4 ? false : { pageSize: 4 }}
+        dataSource={data}
+        renderItem={(item) => (
+          <List.Item
+            key={item.id}
+            actions={[
+              <Button
+                danger
+                onClick={() => dispath(removeProductFromBasketAction(item.id))}
+              >
+                delete
+              </Button>,
+            ]}
+          >
+            <List.Item.Meta
+              title={item.title}
+              avatar={<Avatar src={item.avatar} shape="square" size={82} />}
+            />
+            <Space wrap={true} direction="vertical" size="small">
+              <div className="basket-item-text">
+                <p className="item-text">Стоимость: {item.content}</p>
+                <p className="item-text">Количестко: {item.count}</p>
+                <p className="item-text">На складе: {item.amount}</p>
+              </div>
+            </Space>
+          </List.Item>
+        )}
+      />
+    </>
   );
 };

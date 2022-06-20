@@ -1,10 +1,9 @@
-import { IProduct } from "../../types";
-import { Button } from 'antd';
-
+import { IProduct, NotificationType } from "../../types";
+import { Button } from "antd";
 
 interface IProps {
   product: IProduct[];
-  onBuy: any;
+  onBuy: (string: NotificationType) => void;
 }
 
 export const TotalBasketForm = (props: IProps) => {
@@ -20,7 +19,7 @@ export const TotalBasketForm = (props: IProps) => {
           return total + p.total;
         }, 0)}
       </div>
-      <Button type="primary" onClick={() => props.onBuy("success")} >
+      <Button type="primary" onClick={() => props.onBuy("success")}>
         Buy
       </Button>
     </div>
