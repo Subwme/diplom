@@ -16,7 +16,6 @@ interface IProps {
 export const BasketProducts = ({ data }: { data: IProps[] }) => {
   const dispath = useAppDispatch();
   const count = data.length;
-  console.log(count);
   
   return (
     <>

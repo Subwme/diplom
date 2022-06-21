@@ -50,11 +50,13 @@ export const Basket = () => {
       }
       if (p.count > p.amount) {
         notification["error"]({
-          message: "You must delete one more product",
+          message: `You must delete one more product ${p.name}`,
+          placement: "top",
         });
       } else {
         notification[type]({
           message: "Thaks for buy!",
+          placement: "top",
         });
       }
     });

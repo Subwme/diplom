@@ -1,5 +1,5 @@
 import { IProduct, NotificationType } from "../../types";
-import { Button } from "antd";
+import { Button, Card } from "antd";
 
 interface IProps {
   product: IProduct[];
@@ -9,19 +9,33 @@ interface IProps {
 export const TotalBasketForm = (props: IProps) => {
   const productsFromBasket = props.product;
   return (
-    <div className="basket-total-form">
-      <div className="basket-total-price">
-        К оплате:{" "}
-        {productsFromBasket.reduce((total, p) => {
-          if (p.total === undefined) {
-            return total;
-          }
-          return total + p.total;
-        }, 0)}
-      </div>
-      <Button type="primary" onClick={() => props.onBuy("success")}>
-        Buy
-      </Button>
-    </div>
+    <Card
+      title={
+        <p>
+          Итого:{" "}
+          {productsFromBasket.reduce((total, p) => {
+            if (p.total === undefined) {
+              return total;
+            }
+            return total + p.total;
+          }, 0)}
+          р.
+        </p>
+      }
+      headStyle={{ alignItems: "center" }}
+      bodyStyle={{ display: "none" }}
+      style={{ width: 300, height: 70 }}
+      extra={[
+        <Button
+          key={props.product[0]._id}
+          style={{ marginBottom: 20 }}
+          type="primary"
+          size="small"
+          onClick={() => props.onBuy("success")}
+        >
+          Buy
+        </Button>,
+      ]}
+    />
   );
 };
