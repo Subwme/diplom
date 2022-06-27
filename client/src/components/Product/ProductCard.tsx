@@ -30,6 +30,7 @@ export const ProductCard = () => {
     dispatch(addProductToBasketAction(currentProduct._id));
     notification[type]({
       message: "Product added to cart",
+      placement: "top",
     });
   };
 

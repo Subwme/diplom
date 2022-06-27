@@ -12,16 +12,19 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: ILoginData) => {
-
-    authentication(config.endPoint + "/auth/sign-in", data).then((user) => {
-      dispatch(setUserAction(user));
-      if (user.isAdmin === false) {
-        history.push("/");
-      }
-      if (user.isAdmin === true) {
-        history.push("/admin");
-      }
-    });
+    authentication(config.endPoint + "/auth/sign-in", data)
+      .then((user) => {
+        dispatch(setUserAction(user));
+        if (user.isAdmin === false) {
+          history.push("/");
+        }
+        if (user.isAdmin === true) {
+          history.push("/admin");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -67,13 +70,13 @@ const LoginForm = () => {
           </Form.Item>
         </Form>
       </Card>
-        <Row>
-          <Col span={12} offset={0}>
-            <h5 className="login-footer-text">
-              Welcome to shop! Design by Maksim Krasnikov IT Shcool.
-            </h5>
-          </Col>
-        </Row>
+      <Row>
+        <Col span={12} offset={0}>
+          <h5 className="login-footer-text">
+            Welcome to shop! Design by Maksim Krasnikov IT Shcool.
+          </h5>
+        </Col>
+      </Row>
     </>
   );
 };

@@ -15,22 +15,6 @@ export const AdminPanel = () => {
         </Col>
         <Col span={12} offset={0}>
           <ProductsTable products={products} />
-          {/* <table>
-          <tbody>
-            <tr>
-              <th>id</th>
-              <th>Наименование</th>
-              <th>Категория</th>
-              <th>Стоимость</th>
-              <th>Кол-во</th>
-              <th>Фото</th>
-              <th>Действия</th>
-            </tr>
-            {products.map((product, id) => (
-              <ProductsTable key={product._id} product={product} id={id} />
-            ))}
-          </tbody>
-        </table> */}
         </Col>
       </Row>
     </div>
