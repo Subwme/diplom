@@ -1,36 +1,30 @@
 import "./product.css";
 import { Link } from "react-router-dom";
 import { List } from "antd";
+import { IProduct } from "../../types";
 
-interface IProps {
-  title: string;
-  description: string;
-  content: number;
-  id: string;
-  avatar: string;
-}
-
-export const Product = ({ data }: { data: IProps[] }) => {
+export const Product = ({ data }: { data: IProduct[] }) => {
   const count = data.length;
   return (
-    <List
-      itemLayout="vertical"
-      size="small"
-      pagination={count <= 4 ? false : { pageSize: 4 }}
-      dataSource={data}
-      renderItem={(item) => (
-        <List.Item
-          key={item.id}
-          actions={[<Link to={`/product/${item.id}`}>Перейти к товару</Link>]}
-          extra={<img width={150} alt="logo" src={item.avatar} />}
-        >
-          <List.Item.Meta
-            title={item.title}
-            description={<p>Описание: {item.description}</p>}
-          />
-          <p>Стоимость: {item.content}</p>
-        </List.Item>
-      )}
-    />
+    <>dsdgd</>
+    // <List
+    //   itemLayout="vertical"
+    //   size="small"
+    //   pagination={count <= 4 ? false : { pageSize: 4 }}
+    //   dataSource={data}
+    //   renderItem={(item) => (
+    //     <List.Item
+    //       key={item._id}
+    //       actions={[<Link to={`/product/${item._id}`}>Перейти к товару</Link>]}
+    //       extra={<img width={150} alt="logo" src={item.image} />}
+    //     >
+    //       <List.Item.Meta
+    //         title={item.name}
+    //         description={<p>Описание: {item.description}</p>}
+    //       />
+    //       <p>Стоимость: {item.description}</p>
+    //     </List.Item>
+    //   )}
+    // />
   );
 };

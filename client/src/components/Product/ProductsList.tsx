@@ -5,9 +5,9 @@ import {
   setSortByDescAction,
 } from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
-import { Product } from "./Product";
-import "./product.css"
-import { Input, Button, Space, Col, Row } from "antd";
+import "./product.css";
+import { Input, Button, Space, Col, Row, Empty, List } from "antd";
+import { Link } from "react-router-dom";
 
 export const ProductsList = () => {
   const products = useAppSelector((state) => state.products);
@@ -45,14 +45,7 @@ export const ProductsList = () => {
     dispatch(setSearchTextAction(event.target.value.toLowerCase()));
   };
 
-  const data = sortedProducts.map((p) => ({
-    title: p.name,
-    description: p.description,
-    content: p.price,
-    id: p._id,
-    avatar: `http://placeimg.com/200/200/${Math.random() * 100}`,
-  }));
-
+  const countSortedProducts = sortedProducts.length;
   return (
     <>
       <Row>
@@ -80,7 +73,31 @@ export const ProductsList = () => {
           </Space>
         </Col>
       </Row>
-      <Product data={data} />
+      {sortedProducts.length === 0 ? (
+        <Empty className="empty-list-text" description="Ничего не найдено" />
+      ) : (
+        <List
+          itemLayout="vertical"
+          size="small"
+          pagination={countSortedProducts <= 4 ? false : { pageSize: 4 }}
+          dataSource={sortedProducts}
+          renderItem={(item) => (
+            <List.Item
+              key={item._id}
+              actions={[
+                <Link to={`/product/${item._id}`}>Перейти к товару</Link>,
+              ]}
+              extra={<img width={150} alt="logo" src={item.image} />}
+            >
+              <List.Item.Meta
+                title={item.name}
+                description={<p>Описание: {item.description}</p>}
+              />
+              <p>Стоимость: {item.description}</p>
+            </List.Item>
+          )}
+        />
+      )}
     </>
   );
 };

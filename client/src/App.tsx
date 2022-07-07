@@ -31,6 +31,9 @@ const App = () => {
     }
     Promise.all([getProducts(), getCategories()])
       .then(([products, categories]) => {
+        products.forEach((p) => {
+          p.image = `http://placeimg.com/200/200/${Math.random() * 100}`;
+        });
         dispatch(setProductsAction(products));
         dispatch(setCategoriesAction(categories));
       })
@@ -38,7 +41,6 @@ const App = () => {
   }, [dispatch, user]);
 
   return (
-    
     <Layout>
       <Content>
         <NavigationBar user={user} />

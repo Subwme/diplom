@@ -1,4 +1,7 @@
-.ant-list-split .ant-list-item {
-  border-bottom: 1px solid #9b9494 !important;
+.ant-list-split .ant-list-item.ant-list-item {
+  border-bottom: 1px solid #9b9494;
 }
 
+.ant-empty.empty-list-text {
+  margin-top: 10%;
+}

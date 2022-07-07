@@ -33,7 +33,7 @@ export const BasketProducts = ({ data }: { data: IProps[] }) => {
                 onClick={() => dispath(removeProductFromBasketAction(item.id))}
               >
                 delete
-              </Button>,
+              </Button>
             ]}
           >
             <List.Item.Meta

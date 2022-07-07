@@ -25,17 +25,16 @@ export const TotalBasketForm = (props: IProps) => {
       headStyle={{ alignItems: "center" }}
       bodyStyle={{ display: "none" }}
       style={{ width: 300, height: 70 }}
-      extra={[
+      extra={
         <Button
-          key={props.product[0]._id}
           style={{ marginBottom: 20 }}
           type="primary"
           size="small"
           onClick={() => props.onBuy("success")}
         >
           Buy
-        </Button>,
-      ]}
+        </Button>
+      }
     />
   );
 };
