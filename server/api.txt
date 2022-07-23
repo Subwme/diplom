@@ -68,34 +68,27 @@ body: product{}
 return: product
 --------------------
 
+Комментарии - api/comment/
+Получение всех комментариев /api/comment
 
+auth: true
+type: get
+body: null
+return Comment[]
+--------------------
 
+Добавление комментария - api/comment
 
+auth: true
+type: post
+body: comment
+return Comment
+--------------------
 
-// addToBasketAction(productId)
-// removeToBasketAction(productId)
+Удаление комментария - api/comment/:Id
 
-// state = productInBasketIdList: string[]
-
-
-// productInBasketIdList.reduce((result, productId) => {
-  
-// })
-
-// interface IPosition {
-//   productId: string;
-//   count: number;
-//   productName: string;
-//   productPrice: number;
-// }
-
-// type IResult = IPosition[]
-
-
-
-// productInBasketIdList = [1,2,2,2].slice()
-
-// let result:IResult = [
-//    {productId: 1, count: 1, productname, productPrice},
-//    {productId: 2, count: 3, productname, productPrice}
-//   ]
+auth: true
+type: delete
+body: null
+return null
+--------------------

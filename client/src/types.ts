@@ -2,6 +2,7 @@ export interface IUser {
   email: string;
   name: string;
   isAdmin: boolean;
+  _id: string;
 }
 
 export interface UserData {
@@ -58,4 +59,11 @@ export interface IProductData {
   price: number;
   amount: number;
   url: string;
+}
+
+export interface IComment {
+  content: string;
+  userId: IUser["_id"];
+  productId: IProduct["_id"];
+  _id: string;
 }

@@ -100,6 +100,7 @@ const createUserWithAuth = (data: UserData): IUser => {
     email: jwtData.email,
     name: jwtData.name,
     isAdmin: jwtData.isAdmin,
+    _id: jwtData._id,
   };
   localStorage.setItem("token", data.refreshToken);
 

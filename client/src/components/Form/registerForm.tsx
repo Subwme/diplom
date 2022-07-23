@@ -12,6 +12,8 @@ const RegisterForm = () => {
   const onSubmit = (data: IRegisterData) => {
     authentication(config.endPoint + "/auth/sign-up", data).then((user) => {
       dispatch(setUserAction(user));
+      console.log(user);
+      
       history.replace("/");
     });
   };

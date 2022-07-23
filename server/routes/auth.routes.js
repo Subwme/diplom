@@ -49,6 +49,7 @@ router.post("/sign-up", [
         isAdmin: newUser.isAdmin,
         name: newUser.name,
         email: newUser.email,
+        _id: newUser._id,
       });
       await tokenSevice.save(newUser._id, tokens.refreshToken);
 
