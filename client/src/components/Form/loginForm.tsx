@@ -1,9 +1,7 @@
 import { ILoginData } from "../../types";
 import { setUserAction } from "../../store/reducers/reducer";
 import { useAppDispatch } from "../../store";
-import { authentication } from "../../apiProvider";
 import config from "../../configServer.json";
-import "./authentication.css";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Input, Col, Row, Card } from "antd";
 
@@ -11,21 +9,21 @@ const LoginForm = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  const onSubmit = (data: ILoginData) => {
-    authentication(config.endPoint + "/auth/sign-in", data)
-      .then((user) => {
-        dispatch(setUserAction(user));
-        if (user.isAdmin === false) {
-          history.push("/");
-        }
-        if (user.isAdmin === true) {
-          history.push("/admin");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const onSubmit = (data: ILoginData) => {
+  //   authentication(config.endPoint + "/auth/sign-in", data)
+  //     .then((user) => {
+  //       dispatch(setUserAction(user));
+  //       if (user.isAdmin === false) {
+  //         history.push("/");
+  //       }
+  //       if (user.isAdmin === true) {
+  //         history.push("/admin");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return (
     <>
@@ -35,7 +33,7 @@ const LoginForm = () => {
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
-          onFinish={onSubmit}
+          // onFinish={onSubmit}
           autoComplete="off"
         >
           <Form.Item

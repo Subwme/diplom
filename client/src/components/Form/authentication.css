@@ -22,3 +22,117 @@
 .ant-layout {
   height: 100vh;
 }
+
+.ant-layout-content {
+  overflow: hidden;
+}
+
+.auth-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://img5.goodfon.ru/original/1920x1080/d/e3/jordan-mcgee-lodka-voda-krysha.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.auth-image-text {
+  display: block;
+  color: white;
+  font-size: 45px;
+  font-weight: 600;
+  font-family: cursive;
+  text-align: center;
+}
+
+.auth-form {
+  width: 500px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-color: #e5e6e9;
+}
+
+.ant-btn {
+  margin: 10px 0 0 60px;
+}
+
+.ant-btn-primary {
+  border-color: #40414d;
+  background: #40414d;
+}
+
+input#email {
+  margin: 0 0 0 32px;
+}
+
+input {
+  margin: 20px 0 0 18px;
+}
+
+h1 {
+  margin: 0 0 20px 60px;
+}
+
+.auth-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #40414d;
+  font-family: Verdana;
+}
+
+.auth-username {
+  margin: 0 0 20px 42px;
+  width: 190px;
+}
+
+.auth-email,
+.auth-password,
+.auth-username,
+.auth-confirm-password {
+  border-radius: 2px;
+  font-family: Verdana;
+  border: none;
+  outline: none;
+}
+
+.auth-confirm-password {
+  margin: 20px 0 0 20px;
+}
+
+.auth-footer {
+  display: flex;
+  align-items: baseline;
+  margin: 0 0 0 35px;
+}
+
+.auth-footer-text {
+  display: block;
+  margin: 0 -55px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #40414d;
+  font-family: Verdana;
+}
+
+.auth-powered {
+  display: block;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #40414d;
+  font-family: Verdana;
+}

@@ -5,16 +5,29 @@ import {
   ILoginData,
   INewProduct,
   IProduct,
-  IRegisterData,
   IUser,
   UserData,
 } from "./types";
 
-export const authentication = async (
-  url: string,
-  content: IRegisterData | ILoginData
+export const login = async (
+  content: ILoginData
 ): Promise<IUser> => {
-  const r = await fetch(url, {
+  const r = await fetch(config.endPoint + "/auth/sign-in", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(content),
+  });
+  const json = await r.json();
+
+  return createUserWithAuth(json);
+};
+
+export const register = async (
+  content: ILoginData
+): Promise<IUser> => {
+  const r = await fetch(config.endPoint + "/auth/sign-up", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

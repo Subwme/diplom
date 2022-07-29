@@ -1,8 +1,8 @@
-import RegisterForm from "./components/Form/registerForm";
+// import RegisterForm from "./components/Form/registerForm";
+// import LoginForm from "./components/Form/loginForm";
 import { Route, Switch } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import { Main } from "./components/Main";
-import LoginForm from "./components/Form/loginForm";
 import { ProductCard } from "./components/Product/ProductCard";
 import { useAppDispatch, useAppSelector } from "./store";
 import { getCategories, getProducts } from "./apiProvider";
@@ -18,6 +18,7 @@ import { Layout } from "antd";
 
 import "./style.css";
 import "antd/dist/antd.min.css";
+import AuthForm from "./components/Form/authForm";
 
 const { Content } = Layout;
 
@@ -50,8 +51,9 @@ const App = () => {
           <ProtectedRoute path="/admin">
             <AdminPanel />
           </ProtectedRoute>
-          <Route path="/register" component={RegisterForm} />
-          <Route path="/login" component={LoginForm} />
+          {/* <Route path="/register" component={RegisterForm} />
+          <Route path="/login" component={LoginForm} /> */}
+          <Route path="/auth" exact component={AuthForm} />
           <Route path="/basket" component={Basket} />
         </Switch>
       </Content>

@@ -12,12 +12,20 @@ export interface UserData {
 export type NotificationType = "success";
 
 export interface IRegisterData extends Omit<IUser, "isAdmin"> {
+  name: string;
   password: string;
+  confirmPassword?: string;
 }
 
 export interface ILoginData {
+  name?: string;
   email: string;
   password: string;
+  confirmPassword?: string;
+}
+
+export interface IFormType {
+  authType: "login" | "register";
 }
 
 export interface ICategory {

@@ -1,7 +1,6 @@
 import { IRegisterData } from "../../types";
 import { setUserAction } from "../../store/reducers/reducer";
 import { useAppDispatch } from "../../store";
-import { authentication } from "../../apiProvider";
 import config from "../../configServer.json";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Input, Col, Row, Card } from "antd";
@@ -9,14 +8,14 @@ import { Button, Form, Input, Col, Row, Card } from "antd";
 const RegisterForm = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const onSubmit = (data: IRegisterData) => {
-    authentication(config.endPoint + "/auth/sign-up", data).then((user) => {
-      dispatch(setUserAction(user));
-      console.log(user);
+  // const onSubmit = (data: IRegisterData) => {
+  //   authentication(config.endPoint + "/auth/sign-up", data).then((user) => {
+  //     dispatch(setUserAction(user));
+  //     console.log(user);
       
-      history.replace("/");
-    });
-  };
+  //     history.replace("/");
+  //   });
+  // };
 
   return (
     <>
@@ -26,7 +25,7 @@ const RegisterForm = () => {
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
-          onFinish={onSubmit}
+          // onFinish={onSubmit}
           autoComplete="off"
         >
           <Form.Item

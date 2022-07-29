@@ -9,7 +9,7 @@ export const Main = () => {
   const history = useHistory();
 
   if (user === null) {
-    history.replace("/login");
+    history.replace("/auth");
   }
 
   return (
