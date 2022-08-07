@@ -5,10 +5,21 @@ import { login, register } from "../../apiProvider";
 import { useAppDispatch } from "../../store";
 import { setUserAction } from "../../store/reducers/reducer";
 import { IFormType, ILoginData, IRegisterData } from "../../types";
-import TextField from "../../reusable/textField";
 import "./authentication.css";
+import { LoginTextField } from "./loginTextField";
+import { RegisterTextField } from "./registerTextField";
+//TODO: утилитарные типы
 
-const initialData: ILoginData | IRegisterData = {
+export type ErrorMap = Partial<Record<keyof ILoginData, string>>;
+export type AuthData = ILoginData | IRegisterData;
+const initialData: AuthData = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
+const errorsMap: ErrorMap = {
   name: "",
   email: "",
   password: "",
@@ -24,6 +35,7 @@ const AuthForm = () => {
   const dispatch = useAppDispatch();
   const [formType, setFormType] = useState(authFormType.authType);
   const [data, setData] = useState(initialData);
+  const [errors, setErrors] = useState(errorsMap);
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setData((prevState) => ({
@@ -33,64 +45,61 @@ const AuthForm = () => {
   };
 
   const handleToggleForm = () => {
-    switch (formType) {
-      case "login":
-        setFormType("register");
-        break;
-      case "register":
-        setFormType("login");
-        break;
-      default:
-        return formType;
-    }
+    formType === "login" ? setFormType("register") : setFormType("login");
     setData(initialData);
   };
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    const newErrorMap = validate(data);
 
-    if (data.password !== data.confirmPassword) {
-      alert("Пароли не совпадают!");
+    if (Object.keys(newErrorMap).length > 0) {
+      setErrors(newErrorMap);
       return;
     }
 
-    if (formType !== "login" && data.password === data.confirmPassword) {
-      const sendToData: ILoginData = {
-        email: data.email,
-        password: data.password,
-      };
+    if (Object.keys(newErrorMap).length === 0) {
+      if (formType !== "login") {
+        const sendToData: ILoginData = {
+          email: data.email,
+          password: data.password,
+        };
 
-      login(sendToData)
-        .then((user) => {
-          dispatch(setUserAction(user));
+        login(sendToData)
+          .then((user) => {
+            dispatch(setUserAction(user));
 
-          if (user.isAdmin === false) {
+            if (user.isAdmin === false) {
+              history.push("/");
+            }
+            if (user.isAdmin === true) {
+              history.push("/admin");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      if (formType !== "register") {
+        if (data.password !== data.confirmPassword) {
+          alert("Пароли не совпадают!");
+          return;
+        }
+        const sendToData: AuthData = {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        };
+
+        register(sendToData)
+          .then((user) => {
+            dispatch(setUserAction(user));
             history.push("/");
-          }
-          if (user.isAdmin === true) {
-            history.push("/admin");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-
-    if (formType !== "register" && data.password === data.confirmPassword) {
-      const sendToData: ILoginData = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      };
-
-      register(sendToData)
-        .then((user) => {
-          dispatch(setUserAction(user));
-          history.push("/");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
 
@@ -104,42 +113,16 @@ const AuthForm = () => {
       </div>
       <form onSubmit={onSubmit} className="auth-form">
         <h1>Магазин</h1>
-        {formType === "login" && (
-          <TextField
-            classNamme="auth-username"
-            label="Имя"
-            type="text"
-            name="name"
-            value={data.name}
+        {formType === "login" ? (
+          <RegisterTextField
+            data={data}
+            errors={errors}
             onChange={handleChange}
           />
+        ) : (
+          <LoginTextField data={data} errors={errors} onChange={handleChange} />
         )}
-        <TextField
-          classNamme="auth-email"
-          label="Email"
-          type="text"
-          name="email"
-          value={data.email}
-          onChange={handleChange}
-        />
-        <TextField
-          classNamme="auth-password"
-          label="Пароль"
-          type="password"
-          name="password"
-          value={data.password}
-          onChange={handleChange}
-        />
-        {formType === "login" && (
-          <TextField
-            classNamme="auth-confirm-password"
-            label="Пароль"
-            type="text"
-            name="confirmPassword"
-            value={data.confirmPassword}
-            onChange={handleChange}
-          />
-        )}
+
         <Button type="primary" htmlType="submit">
           {formType === "register" ? "Войти" : "Регистрация"}
         </Button>
@@ -159,3 +142,27 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
+
+function validate <T extends AuthData>(content: T ): ErrorMap {
+  const errors: ErrorMap = {};
+
+  if (content.name === "") {
+    errors.name = "Обязательно для заполнения";
+  }
+
+  if (content.email === "") {
+    errors.email = "Обязательно для заполнения";
+  }
+
+  if (content.password === "") {
+    errors.password = "Обязательно для заполнения";
+  }
+
+  if (content.password === "") {
+    errors.confirmPassword = "Обязательно для заполнения";
+  }
+
+  return errors;
+};
+
+// TODO: VALIDATOR , REQUIRES, ERRORS
