@@ -12,7 +12,6 @@ export interface UserData {
 export type NotificationType = "success";
 
 export interface IRegisterData extends Omit<IUser, "isAdmin"> {
-  name: string;
   password: string;
   confirmPassword?: string;
 }

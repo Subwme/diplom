@@ -19,13 +19,12 @@ const TextField = ({
   errors,
   onChange,
 }: ITextFieldProps) => {
-  console.log(errors);
-
   return (
     <div className="auth-area">
       <label className="auth-label" htmlFor={name}>
         {label}
       </label>
+
       <input
         className={classNamme}
         type={type}

@@ -1,5 +1,6 @@
-import { IUser } from "./types";
+import { ILoginData, IRegisterData, IUser } from "./types";
 import jwtParse from "jwt-decode";
+import { AuthData } from "./components/Form/authForm";
 
 
 export const getUserFromLocalStorage = (): IUser | null => {
@@ -17,3 +18,84 @@ export const getProductsInBasketIdListFromLocalStorage = (): string[] => {
   }
   return JSON.parse(idList);
 };
+
+const minLegtnhName = 3;
+const minLengthPassword = 6;
+const emailRegExp = /@/;
+
+const validateConfig = {
+  name: {
+    count: `Минимальная длина имени ${minLegtnhName} символа`,
+    require: "Имя обязательно для заполнения",
+  },
+  email: {
+    isEmail: "Введите корректный Email",
+    require: "Email обязателен для заполнения",
+  },
+  password: {
+    count: `Минимальная длина пароля ${minLengthPassword} символов`,
+    require: "Пароль обязательн для заполнения",
+  },
+};
+
+type ErrorMap<T> = Partial<Record<keyof T, string>>;
+
+export function validateLogin(content: ILoginData): ErrorMap<ILoginData> {
+  const errors: ErrorMap<ILoginData> = {};
+
+  if (content.email === "") {
+    errors.email = validateConfig.email.require;
+  }
+
+  if (content.email && !emailRegExp.test(content.email)) {
+    errors.email = validateConfig.email.isEmail;
+  }
+
+  if (content.password === "") {
+    errors.password = validateConfig.password.require;
+  }
+
+  if (content.password && content.password.length < minLengthPassword) {
+    errors.password = validateConfig.password.count;
+  }
+
+  return errors;
+}
+
+export function validateRegister(content: AuthData): ErrorMap<IRegisterData> {
+  const errors: ErrorMap<IRegisterData> = {};
+
+  if (content.name === "") {
+    errors.name = validateConfig.name.require;
+  }
+
+  if (content.name && content.name.length < minLegtnhName) {
+    errors.name = validateConfig.name.count;
+  }
+
+  if (content.email === "") {
+    errors.email = validateConfig.email.require;
+  }
+
+  if (content.email && !emailRegExp.test(content.email)) {
+    errors.email = validateConfig.email.isEmail;
+  }
+
+  if (content.password === "") {
+    errors.password = validateConfig.password.require;
+  }
+
+  if (content.password && content.password.length < minLengthPassword) {
+    errors.password = validateConfig.password.count;
+  }
+
+  if (content.confirmPassword === "") {
+    errors.confirmPassword = validateConfig.password.require;
+  }
+
+  if (content.confirmPassword && content.confirmPassword.length < minLengthPassword) {
+    errors.confirmPassword = validateConfig.password.count;
+  }
+
+  return errors;
+}

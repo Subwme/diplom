@@ -1,16 +1,16 @@
-import { Button } from "antd";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { login, register } from "../../apiProvider";
 import { useAppDispatch } from "../../store";
 import { setUserAction } from "../../store/reducers/reducer";
 import { IFormType, ILoginData, IRegisterData } from "../../types";
+import { validateLogin, validateRegister } from "../../utils";
 import "./authentication.css";
-import { LoginTextField } from "./loginTextField";
-import { RegisterTextField } from "./registerTextField";
+import { NewLoginForm } from "./newLoginForm";
+import { NewRegisterForm } from "./newRegisterForm";
 //TODO: утилитарные типы
 
-export type ErrorMap = Partial<Record<keyof ILoginData, string>>;
+export type ErrorDraft = Partial<Record<keyof ILoginData, string>>;
 export type AuthData = ILoginData | IRegisterData;
 const initialData: AuthData = {
   name: "",
@@ -19,7 +19,7 @@ const initialData: AuthData = {
   confirmPassword: "",
 };
 
-const errorsMap: ErrorMap = {
+const errorsMap: ErrorDraft = {
   name: "",
   email: "",
   password: "",
@@ -45,21 +45,26 @@ const AuthForm = () => {
   };
 
   const handleToggleForm = () => {
+    console.log("1");
+
     formType === "login" ? setFormType("register") : setFormType("login");
     setData(initialData);
+    setErrors(errorsMap);
   };
 
   const onSubmit = (event: React.FormEvent) => {
+    console.log(2);
+
     event.preventDefault();
-    const newErrorMap = validate(data);
+    //loginStep
+    if (formType === "login") {
+      const newErrorMapLogin = validateLogin(data);
 
-    if (Object.keys(newErrorMap).length > 0) {
-      setErrors(newErrorMap);
-      return;
-    }
+      if (Object.keys(newErrorMapLogin).length > 0) {
+        setErrors(newErrorMapLogin);
+        return;
+      }
 
-    if (Object.keys(newErrorMap).length === 0) {
-      if (formType !== "login") {
         const sendToData: ILoginData = {
           email: data.email,
           password: data.password,
@@ -72,6 +77,7 @@ const AuthForm = () => {
             if (user.isAdmin === false) {
               history.push("/");
             }
+
             if (user.isAdmin === true) {
               history.push("/admin");
             }
@@ -79,30 +85,37 @@ const AuthForm = () => {
           .catch((error) => {
             console.log(error);
           });
+    }
+    //registerStep
+    if (formType === "register") {
+      const newErrorMapRegister = validateRegister(data);
+      
+      if (Object.keys(newErrorMapRegister).length > 0) {
+        setErrors(newErrorMapRegister);
+        return;
       }
-      if (formType !== "register") {
-        if (data.password !== data.confirmPassword) {
-          alert("Пароли не совпадают!");
-          return;
-        }
-        const sendToData: AuthData = {
-          name: data.name,
-          email: data.email,
-          password: data.password,
-        };
 
-        register(sendToData)
-          .then((user) => {
-            dispatch(setUserAction(user));
-            history.push("/");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      if (data.password !== data.confirmPassword) {
+        alert("Пароли не совпадают!");
+        return;
       }
+      const sendToData: AuthData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      };
+
+      register(sendToData)
+        .then((user) => {
+          dispatch(setUserAction(user));
+          history.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
-
+  // TODO: две формы, логин и рега
   return (
     <div className="auth-container">
       <div className="auth-image">
@@ -111,58 +124,38 @@ const AuthForm = () => {
           сталкивался. Это велосипед для нашего сознания.
         </p>
       </div>
-      <form onSubmit={onSubmit} className="auth-form">
-        <h1>Магазин</h1>
+      <>
         {formType === "login" ? (
-          <RegisterTextField
+          <NewLoginForm
             data={data}
             errors={errors}
             onChange={handleChange}
+            onSubmit={onSubmit}
+            handleToggleForm={handleToggleForm}
           />
         ) : (
-          <LoginTextField data={data} errors={errors} onChange={handleChange} />
+          <NewRegisterForm
+            data={data}
+            errors={errors}
+            onChange={handleChange}
+            onSubmit={onSubmit}
+            handleToggleForm={handleToggleForm}
+          />
         )}
-
-        <Button type="primary" htmlType="submit">
-          {formType === "register" ? "Войти" : "Регистрация"}
-        </Button>
-        <div className="auth-footer">
-          <p className="auth-footer-text">
-            {formType === "register"
-              ? "Еще нет аккаунта ? "
-              : "Уже есть аккаунт ?"}
-          </p>
-          <Button onClick={() => handleToggleForm()} type="link">
-            {formType === "register" ? "Зарегистрироваться" : "Авторизоваться"}
-          </Button>
-        </div>
-      </form>
+      </>
     </div>
   );
 };
 
 export default AuthForm;
 
-function validate <T extends AuthData>(content: T ): ErrorMap {
-  const errors: ErrorMap = {};
+// type Names = keyof AuthData;
+// type FieldsR = Record<Names, string>;
+// type Fields = Partial<FieldsR>;
+// type Fields2 = { [key in Names]?: string };
 
-  if (content.name === "") {
-    errors.name = "Обязательно для заполнения";
-  }
+// type typeObj = Record<"a" | "b" | "c", string>
 
-  if (content.email === "") {
-    errors.email = "Обязательно для заполнения";
-  }
-
-  if (content.password === "") {
-    errors.password = "Обязательно для заполнения";
-  }
-
-  if (content.password === "") {
-    errors.confirmPassword = "Обязательно для заполнения";
-  }
-
-  return errors;
-};
-
-// TODO: VALIDATOR , REQUIRES, ERRORS
+//TODO: Не должно быть магических цифр
+//TODO: сначала придумаю сам, как нибудь
+//TODO: почитать про шаблоны для формы - js шаблоны

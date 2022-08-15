@@ -80,7 +80,7 @@ input#email {
 }
 
 input {
-  margin: 20px 0 0 18px;
+  margin: 0 0 0 18px;
 }
 
 h1 {
@@ -95,7 +95,7 @@ h1 {
 }
 
 .auth-username {
-  margin: 0 0 20px 42px;
+  margin: 0 0 0 42px;
   width: 190px;
 }
 
@@ -110,7 +110,7 @@ h1 {
 }
 
 .auth-confirm-password {
-  margin: 20px 0 0 20px;
+  margin: 0 0 0 20px;
 }
 
 .auth-footer {
@@ -135,4 +135,14 @@ h1 {
   font-weight: 600;
   color: #40414d;
   font-family: Verdana;
+}
+
+.auth-area {
+  margin: 0 0 20px 0;
+}
+
+.auth-text-error {
+  display: block;
+  margin: 0;
+  color: red;
 }
