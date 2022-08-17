@@ -1,5 +1,5 @@
-import { getProductsInBasketIdListFromLocalStorage } from "./../../utils";
-import { getUserFromLocalStorage } from "../../utils";
+import { getProductsInBasketIdListFromLocalStorage } from "../../utils/utils";
+import { getUserFromLocalStorage } from "../../utils/utils";
 import { ICategory, IProduct, IUser } from "./../../types";
 import {
   IState,

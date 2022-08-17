@@ -1,4 +1,4 @@
-import { deleteProduct } from "../../apiProvider";
+import { deleteProduct } from "../../utils/apiProvider";
 import { useAppDispatch, useAppSelector } from "../../store";
 import {
   removeProductFromAdminAction,

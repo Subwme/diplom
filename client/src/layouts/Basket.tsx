@@ -1,7 +1,7 @@
-import { useAppSelector } from "../../store";
-import { IProduct, NotificationType } from "../../types";
-import { BasketProducts } from "./BasketProducts";
-import { TotalBasketForm } from "./TotalBasketForm";
+import { useAppSelector } from "../store";
+import { IProduct, NotificationType } from "../types";
+import { BasketProducts } from "../components/Basket/BasketProducts";
+import { TotalBasketForm } from "../components/Basket/TotalBasketForm";
 import { Col, Divider, Row } from "antd";
 import { notification } from "antd";
 

@@ -1,7 +1,6 @@
-import { ILoginData, IRegisterData, IUser } from "./types";
+import { ILoginData, IRegisterData, IUser } from "../types";
 import jwtParse from "jwt-decode";
-import { AuthData } from "./components/Form/authForm";
-
+import { AuthData } from "../components/Form/authForm";
 
 export const getUserFromLocalStorage = (): IUser | null => {
   const token = localStorage.getItem("token");
@@ -19,22 +18,28 @@ export const getProductsInBasketIdListFromLocalStorage = (): string[] => {
   return JSON.parse(idList);
 };
 
-const minLegtnhName = 3;
+const minLengthName = 3;
 const minLengthPassword = 6;
 const emailRegExp = /@/;
+const nameCount = `Минимальная длина имени ${minLengthName} символа`;
+const nameRequire = "Имя обязательно для заполнения";
+const passwordCount = `Минимальная длина пароля ${minLengthPassword} символов`;
+const passwordRequire = "Пароль обязателен для заполнения";
+const isEmailCondition = "Введите корректный Email";
+const emailRequire = "Email обязателен для заполнения";
 
 const validateConfig = {
   name: {
-    count: `Минимальная длина имени ${minLegtnhName} символа`,
-    require: "Имя обязательно для заполнения",
+    count: nameCount,
+    require: nameRequire,
   },
   email: {
-    isEmail: "Введите корректный Email",
-    require: "Email обязателен для заполнения",
+    isEmail: isEmailCondition,
+    require: emailRequire,
   },
   password: {
-    count: `Минимальная длина пароля ${minLengthPassword} символов`,
-    require: "Пароль обязательн для заполнения",
+    count: passwordCount,
+    require: passwordRequire,
   },
 };
 
@@ -69,7 +74,7 @@ export function validateRegister(content: AuthData): ErrorMap<IRegisterData> {
     errors.name = validateConfig.name.require;
   }
 
-  if (content.name && content.name.length < minLegtnhName) {
+  if (content.name && content.name.length < minLengthName) {
     errors.name = validateConfig.name.count;
   }
 
@@ -93,7 +98,10 @@ export function validateRegister(content: AuthData): ErrorMap<IRegisterData> {
     errors.confirmPassword = validateConfig.password.require;
   }
 
-  if (content.confirmPassword && content.confirmPassword.length < minLengthPassword) {
+  if (
+    content.confirmPassword &&
+    content.confirmPassword.length < minLengthPassword
+  ) {
     errors.confirmPassword = validateConfig.password.count;
   }
 

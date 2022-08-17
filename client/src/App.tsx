@@ -5,14 +5,14 @@ import { NavigationBar } from "./components/NavigationBar";
 import { Main } from "./components/Main";
 import { ProductCard } from "./components/Product/ProductCard";
 import { useAppDispatch, useAppSelector } from "./store";
-import { getCategories, getProducts } from "./apiProvider";
+import { getCategories, getProducts } from "./utils/apiProvider";
 import { useEffect } from "react";
 import {
   setProductsAction,
   setCategoriesAction,
 } from "./store/reducers/reducer";
-import { Basket } from "./components/Basket/Basket";
-import { AdminPanel } from "./components/Administrator/AdminPanel";
+import { Basket } from "./layouts/Basket";
+import { AdminPanel } from "./layouts/AdminPanel";
 import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
 import { Layout } from "antd";
 

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { login, register } from "../../apiProvider";
+import { login, register } from "../../utils/apiProvider";
 import { useAppDispatch } from "../../store";
 import { setUserAction } from "../../store/reducers/reducer";
 import { IFormType, ILoginData, IRegisterData } from "../../types";
-import { validateLogin, validateRegister } from "../../utils";
+import { validateLogin, validateRegister } from "../../utils/utils";
 import "./authentication.css";
 import { NewLoginForm } from "./newLoginForm";
 import { NewRegisterForm } from "./newRegisterForm";

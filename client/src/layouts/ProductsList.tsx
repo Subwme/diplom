@@ -1,11 +1,11 @@
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import {
   setSearchTextAction,
   setSortByAscAction,
   setSortByDescAction,
-} from "../../store/reducers/reducer";
-import { IProduct } from "../../types";
-import "./product.css";
+} from "../store/reducers/reducer";
+import { IProduct } from "../types";
+import "../components/Product/product.css";
 import { Input, Button, Space, Col, Row, Empty, List } from "antd";
 import { Link } from "react-router-dom";
 

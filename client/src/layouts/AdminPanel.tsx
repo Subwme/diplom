@@ -1,7 +1,7 @@
-import { useAppSelector } from "../../store";
-import { AdminTools } from "./AdminTools";
-import { ProductsTable } from "./ProductsTable";
-import "./Adminpanel.css";
+import { useAppSelector } from "../store";
+import { AdminTools } from "../components/Administrator/AdminTools";
+import { ProductsTable } from "../components/Administrator/ProductsTable";
+import "../components/Administrator/Adminpanel.css"
 import { Col, Row } from "antd";
 
 export const AdminPanel = () => {

@@ -7,7 +7,7 @@ import {
   IProduct,
   IUser,
   UserData,
-} from "./types";
+} from "../types";
 
 export const login = async (
   content: ILoginData

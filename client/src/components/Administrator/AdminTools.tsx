@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Row, Select, Space } from "antd";
 import React, { useState, useEffect } from "react";
-import { addProduct, updateProduct } from "../../apiProvider";
+import { addProduct, updateProduct } from "../../utils/apiProvider";
 import { useAppDispatch, useAppSelector } from "../../store";
 import {
   addedProductAction,
