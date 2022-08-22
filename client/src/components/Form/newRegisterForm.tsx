@@ -1,18 +1,63 @@
 import { Button } from "antd";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import TextField from "../../reusable/textField";
+import { useAppDispatch } from "../../store";
+import { setUserAction } from "../../store/reducers/reducer";
+import { register } from "../../utils/apiProvider";
+import { validateRegister } from "../../utils/utils";
 import { AuthData, ErrorDraft } from "./authForm";
 
 interface IProps {
   data: AuthData;
-  errors: ErrorDraft;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (event: React.FormEvent) => void;
   handleToggleForm: () => void;
 }
 
+const errorsMap: ErrorDraft = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 export const NewRegisterForm = (props: IProps) => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const [errors, setErrors] = useState(errorsMap);
+
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const newErrorMapRegister = validateRegister(props.data);
+      
+      if (Object.keys(newErrorMapRegister).length > 0) {
+        setErrors(newErrorMapRegister);
+        return;
+      }
+
+      if (props.data.password !== props.data.confirmPassword) {
+        alert("Пароли не совпадают!");
+        return;
+      }
+      const sendToData: AuthData = {
+        name: props.data.name,
+        email: props.data.email,
+        password: props.data.password,
+      };
+
+      register(sendToData)
+        .then((user) => {
+          dispatch(setUserAction(user));
+          history.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+  
   return (
-    <form onSubmit={props.onSubmit} className="auth-form">
+    <form onSubmit={onSubmit} className="auth-form">
       <h1>Магазин</h1>
       <TextField
         classNamme="auth-username"
@@ -21,7 +66,7 @@ export const NewRegisterForm = (props: IProps) => {
         name="name"
         value={props.data.name}
         onChange={props.onChange}
-        errors={props.errors.name}
+        errors={errors.name}
       />
       <TextField
         classNamme="auth-email"
@@ -30,7 +75,7 @@ export const NewRegisterForm = (props: IProps) => {
         name="email"
         value={props.data.email}
         onChange={props.onChange}
-        errors={props.errors.email}
+        errors={errors.email}
       />
       <TextField
         classNamme="auth-password"
@@ -39,16 +84,16 @@ export const NewRegisterForm = (props: IProps) => {
         name="password"
         value={props.data.password}
         onChange={props.onChange}
-        errors={props.errors.password}
+        errors={errors.password}
       />
       <TextField
         classNamme="auth-confirm-password"
         label="Пароль"
-        type="text"
+        type="password"
         name="confirmPassword"
         value={props.data.confirmPassword}
         onChange={props.onChange}
-        errors={props.errors.confirmPassword}
+        errors={errors.confirmPassword}
       />
       <Button type="primary" htmlType="submit">
         Регистрация

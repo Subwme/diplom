@@ -74,3 +74,9 @@ export interface IComment {
   productId: IProduct["_id"];
   _id: string;
 }
+
+
+// type Names = keyof AuthData;
+// type FieldsR = Record<Names, string>;
+// type Fields = Partial<FieldsR>;
+// type Fields2 = { [key in Names]?: string };
