@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { NewLoginForm } from "./newLoginForm";
-import { NewRegisterForm } from "./newRegisterForm";
-import { IFormType, ILoginData, IRegisterData } from "../../types";
-import "./authentication.css";
+import { NewLoginForm } from "../components/Form/newLoginForm";
+import { NewRegisterForm } from "../components/Form/newRegisterForm";
+import { IFormType, ILoginData, IRegisterData } from "../types";
+import "../components/Form/authentication.css";
 
 export type ErrorDraft = Partial<Record<keyof ILoginData, string>>;
 export type AuthData = ILoginData | IRegisterData;

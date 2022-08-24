@@ -1,6 +1,6 @@
 import { ILoginData, IRegisterData, IUser } from "../types";
 import jwtParse from "jwt-decode";
-import { AuthData } from "../components/Form/authForm";
+import { AuthData } from "../layouts/authForm";
 
 export const getUserFromLocalStorage = (): IUser | null => {
   const token = localStorage.getItem("token");

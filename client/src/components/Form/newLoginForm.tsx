@@ -7,7 +7,7 @@ import { setUserAction } from "../../store/reducers/reducer";
 import { ILoginData } from "../../types";
 import { login } from "../../utils/apiProvider";
 import { validateLogin } from "../../utils/utils";
-import { ErrorDraft } from "./authForm";
+import { ErrorDraft } from "../../layouts/authForm";
 
 interface IProps {
   data: ILoginData;
@@ -53,7 +53,7 @@ export const NewLoginForm = (props: IProps) => {
           history.push("/admin");
         }
       })
-      .catch(({ message }) => {
+      .catch(({ message }: { message: string }) => {
         setErrors({ ...errors, email: message });
       });
   };

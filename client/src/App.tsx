@@ -16,7 +16,7 @@ import { Layout } from "antd";
 
 import "./style.css";
 import "antd/dist/antd.min.css";
-import AuthForm from "./components/Form/authForm";
+import AuthForm from "./layouts/authForm";
 
 const { Content } = Layout;
 

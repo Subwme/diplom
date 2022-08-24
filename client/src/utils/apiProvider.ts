@@ -29,7 +29,7 @@ export const login = async (content: ILoginData): Promise<IUser> => {
     throw new Error("Oops somthing went wrong");
   }
 
-  const { error } = json;
+  const { error }= json;
 
   if (error) {
     throw new Error("Указан неверный адрес почты");

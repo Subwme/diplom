@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../store";
 import { setUserAction } from "../../store/reducers/reducer";
 import { register } from "../../utils/apiProvider";
 import { validateRegister } from "../../utils/utils";
-import { AuthData, ErrorDraft } from "./authForm";
+import { AuthData, ErrorDraft } from "../../layouts/authForm";
 
 interface IProps {
   data: AuthData;
