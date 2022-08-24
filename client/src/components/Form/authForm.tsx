@@ -6,14 +6,8 @@ import "./authentication.css";
 
 export type ErrorDraft = Partial<Record<keyof ILoginData, string>>;
 export type AuthData = ILoginData | IRegisterData;
-const initialData: AuthData = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
 
-const errorsMap: ErrorDraft = {
+const initialData: AuthData = {
   name: "",
   email: "",
   password: "",
@@ -28,7 +22,6 @@ const AuthForm = () => {
 
   const [formType, setFormType] = useState(authFormType.authType);
   const [data, setData] = useState(initialData);
-  const [errors, setErrors] = useState(errorsMap);
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setData((prevState) => ({
@@ -40,7 +33,6 @@ const AuthForm = () => {
   const handleToggleForm = () => {
     formType === "login" ? setFormType("register") : setFormType("login");
     setData(initialData);
-    setErrors(errorsMap);
   };
 
   return (

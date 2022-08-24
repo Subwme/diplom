@@ -9,9 +9,7 @@ import {
   UserData,
 } from "../types";
 
-export const login = async (
-  content: ILoginData
-): Promise<IUser> => {
+export const login = async (content: ILoginData): Promise<IUser> => {
   const r = await fetch(config.endPoint + "/auth/sign-in", {
     method: "POST",
     headers: {
@@ -19,14 +17,28 @@ export const login = async (
     },
     body: JSON.stringify(content),
   });
-  const json = await r.json();
+  let json;
+
+  if (r.status === 404) {
+    throw new Error("Oops somthing went wrong");
+  }
+
+  try {
+    json = await r.json();
+  } catch (error) {
+    throw new Error("Oops somthing went wrong");
+  }
+
+  const { error } = json;
+
+  if (error) {
+    throw new Error("Указан неверный адрес почты");
+  }
 
   return createUserWithAuth(json);
 };
 
-export const register = async (
-  content: ILoginData
-): Promise<IUser> => {
+export const register = async (content: ILoginData): Promise<IUser> => {
   const r = await fetch(config.endPoint + "/auth/sign-up", {
     method: "POST",
     headers: {

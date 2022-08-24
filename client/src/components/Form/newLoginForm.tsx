@@ -53,8 +53,8 @@ export const NewLoginForm = (props: IProps) => {
           history.push("/admin");
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(({ message }) => {
+        setErrors({ ...errors, email: message });
       });
   };
 

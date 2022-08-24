@@ -1,5 +1,3 @@
-// import RegisterForm from "./components/Form/registerForm";
-// import LoginForm from "./components/Form/loginForm";
 import { Route, Switch } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import { Main } from "./components/Main";
@@ -51,8 +49,6 @@ const App = () => {
           <ProtectedRoute path="/admin">
             <AdminPanel />
           </ProtectedRoute>
-          {/* <Route path="/register" component={RegisterForm} />
-          <Route path="/login" component={LoginForm} /> */}
           <Route path="/auth" exact component={AuthForm} />
           <Route path="/basket" component={Basket} />
         </Switch>
