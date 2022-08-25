@@ -22,16 +22,32 @@ export const NotFound = () => {
         src="https://i.imgflip.com/3ig4xt.jpg"
         alt="WATMAN"
       />
-      <div
-        style={{
-          textAlign: "center",
-          marginTop: 10,
-          fontSize: 16,
-        }}
-      >
-        Go back to {user ? "main Admin!" : "login User!"}{" "}
-        {user ? <Link to="/admin">Main</Link> : <Link to="/auth">Login</Link>}
-      </div>
+      {user?.isAdmin || (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: 10,
+            fontSize: 16,
+          }}
+        >
+          {user ? "Go back to main User!" : "Go back to login User!"}
+          {" "}
+          {user ? <Link to="/main">Main</Link> : <Link to="/auth">Login</Link>}
+        </div>
+      )}
+      {user?.isAdmin && (
+        <Link
+          style={{
+            display:"block",
+            textAlign: "center",
+            marginTop: 10,
+            fontSize: 16,
+          }}
+          to="/admin"
+        >
+          Back to AdminPanel
+        </Link>
+      )}
     </>
   );
 };

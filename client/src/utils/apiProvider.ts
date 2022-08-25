@@ -10,7 +10,7 @@ import {
 } from "../types";
 
 export const login = async (content: ILoginData): Promise<IUser> => {
-  const r = await fetch(config.endPoint + "/auth/sign-in", {
+  const r = await fetch(config.endPoint + "/auth/sign-inb", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
