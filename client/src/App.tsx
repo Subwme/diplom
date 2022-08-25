@@ -17,6 +17,7 @@ import { Layout } from "antd";
 import "./style.css";
 import "antd/dist/antd.min.css";
 import AuthForm from "./layouts/authForm";
+import { NotFound } from "./layouts/notFound";
 
 const { Content } = Layout;
 
@@ -51,6 +52,7 @@ const App = () => {
           </ProtectedRoute>
           <Route path="/auth" exact component={AuthForm} />
           <Route path="/basket" component={Basket} />
+          <Route path="/404" component={NotFound} />
         </Switch>
       </Content>
     </Layout>

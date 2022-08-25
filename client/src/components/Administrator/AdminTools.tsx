@@ -9,6 +9,7 @@ import {
 } from "../../store/reducers/reducer";
 import { IProduct } from "../../types";
 import "./Adminpanel.css";
+import { useHistory } from "react-router-dom";
 
 const blank: IProduct = {
   description: "",
@@ -22,6 +23,7 @@ const blank: IProduct = {
 
 export const AdminTools = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const currentProductId = useAppSelector((state) => state.selecteEditProduct);
   const products = useAppSelector((state) => state.products);
   const categories = useAppSelector((state) => state.categories);
@@ -67,8 +69,10 @@ export const AdminTools = () => {
         .then((product) => {
           dispatch(addedProductAction(product));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(({ message }: { message: string }) => {
+          if (message === "Oops something went wrong") {
+            history.push("/404");
+          }
         });
     }
   };
@@ -109,19 +113,19 @@ export const AdminTools = () => {
           />
         </Form.Item>
         <Form.Item label="Категория">
-            <Select
-              value={draft.category}
-              placeholder="Категория"
-              onChange={handleChangeSelect}
-            >
-              {categories.map((category) => {
-                return (
-                  <Select.Option value={category._id} key={category._id}>
-                    {category.name}
-                  </Select.Option>
-                );
-              })}
-            </Select>
+          <Select
+            value={draft.category}
+            placeholder="Категория"
+            onChange={handleChangeSelect}
+          >
+            {categories.map((category) => {
+              return (
+                <Select.Option value={category._id} key={category._id}>
+                  {category.name}
+                </Select.Option>
+              );
+            })}
+          </Select>
         </Form.Item>
         <Form.Item label="Стоимость">
           <Input

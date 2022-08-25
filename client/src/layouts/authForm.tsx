@@ -19,7 +19,6 @@ const authFormType: IFormType = {
 };
 
 const AuthForm = () => {
-
   const [formType, setFormType] = useState(authFormType.authType);
   const [data, setData] = useState(initialData);
 
@@ -63,4 +62,3 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
-

@@ -46,14 +46,17 @@ export const NewLoginForm = (props: IProps) => {
         dispatch(setUserAction(user));
 
         if (user.isAdmin === false) {
-          history.push("/");
+          history.replace("/");
         }
 
         if (user.isAdmin === true) {
-          history.push("/admin");
+          history.replace("/admin");
         }
       })
       .catch(({ message }: { message: string }) => {
+        if (message === "Oops something went wrong") {
+          history.push("/404");
+        }
         setErrors({ ...errors, email: message });
       });
   };

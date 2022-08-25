@@ -20,13 +20,13 @@ export const login = async (content: ILoginData): Promise<IUser> => {
   let json;
 
   if (r.status === 404) {
-    throw new Error("Oops somthing went wrong");
+    throw new Error("Oops something went wrong");
   }
 
   try {
     json = await r.json();
   } catch (error) {
-    throw new Error("Oops somthing went wrong");
+    throw new Error("Oops something went wrong");
   }
 
   const { error }= json;
@@ -73,6 +73,11 @@ export const addProduct = async (product: INewProduct) => {
       "Content-Type": "application/json",
     },
   });
+
+  if (r.status === 404) {
+    throw new Error("Oops something went wrong");
+  }
+
   if (!r.ok) {
     throw new Error();
   }
