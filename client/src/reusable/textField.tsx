@@ -20,8 +20,8 @@ const TextField = ({
   onChange,
 }: ITextFieldProps) => {
   return (
-    <div className="auth-area">
-      <label className="auth-label" htmlFor={name}>
+    <div className="form__area">
+      <label className="form__label" htmlFor={name}>
         {label}
       </label>
 
@@ -33,7 +33,7 @@ const TextField = ({
         value={value}
         onChange={onChange}
       />
-      <p className="auth-text-error">{errors ? errors : false}</p>
+      <p className="form__text-error">{errors ? errors : false}</p>
     </div>
   );
 };

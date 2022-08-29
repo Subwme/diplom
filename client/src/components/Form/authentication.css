@@ -4,12 +4,6 @@
   font-size: 20px;
 }
 
-.login-footer-text {
-  text-align: center;
-  font-family: sans-serif;
-  margin: 20px 0 0 0;
-}
-
 .ant-form-item-control-input {
   width: 300px;
 }
@@ -87,7 +81,7 @@ h1 {
   margin: 0 0 20px 60px;
 }
 
-.auth-label {
+.form__label {
   font-size: 14px;
   font-weight: 600;
   color: #40414d;
@@ -128,20 +122,11 @@ h1 {
   font-family: Verdana;
 }
 
-.auth-powered {
-  display: block;
-  padding: 0;
-  font-size: 12px;
-  font-weight: 600;
-  color: #40414d;
-  font-family: Verdana;
-}
-
-.auth-area {
+.form__area {
   margin: 0 0 20px 0;
 }
 
-.auth-text-error {
+.form__text-error {
   display: block;
   margin: 0;
   color: red;
