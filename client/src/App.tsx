@@ -1,13 +1,14 @@
 import { Route, Switch } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import { Main } from "./components/Main";
-import { ProductCard } from "./components/Product/ProductCard";
+import { ProductCard } from "./layouts/ProductCard";
 import { useAppDispatch, useAppSelector } from "./store";
-import { getCategories, getProducts } from "./utils/apiProvider";
+import { getCategories, getComments, getProducts } from "./utils/apiProvider";
 import { useEffect } from "react";
 import {
   setProductsAction,
   setCategoriesAction,
+  setCommnetsAction,
 } from "./store/reducers/reducer";
 import { Basket } from "./layouts/Basket";
 import { AdminPanel } from "./layouts/AdminPanel";
@@ -29,13 +30,14 @@ const App = () => {
     if (user === null) {
       return;
     }
-    Promise.all([getProducts(), getCategories()])
-      .then(([products, categories]) => {
+    Promise.all([getProducts(), getCategories(), getComments()])
+      .then(([products, categories, comments]) => {
         products.forEach((p) => {
           p.image = `http://placeimg.com/200/200/${Math.random() * 100}`;
         });
         dispatch(setProductsAction(products));
         dispatch(setCategoriesAction(categories));
+        dispatch(setCommnetsAction(comments));
       })
       .catch((error) => console.log(error));
   }, [dispatch, user]);
@@ -53,6 +55,7 @@ const App = () => {
           <Route path="/auth" exact component={AuthForm} />
           <Route path="/basket" component={Basket} />
           <Route path="/404" component={NotFound} />
+          <Route component={NotFound} />
         </Switch>
       </Content>
     </Layout>

@@ -53,7 +53,7 @@ router.post("/sign-up", [
       });
       await tokenSevice.save(newUser._id, tokens.refreshToken);
 
-      res.status(201).send({ ...tokens, userId: newUser._id });
+      res.status(201).send({ ...tokens, _id: newUser._id });
     } catch (error) {
       res.status(500).json({
         message: "На сервере произошла ошибка. Попробуйте позже",
@@ -109,10 +109,12 @@ router.post("/sign-in", [
         isAdmin: existingUser.isAdmin,
         name: existingUser.name,
         email: existingUser.email,
+        _id: existingUser._id,
       });
       await tokenSevice.save(existingUser._id, tokens.refreshToken);
 
-      res.status(200).send({ ...tokens, userId: existingUser._id });
+      res.status(200).send({ ...tokens, _id: existingUser._id });
+      console.log(existingUser._id);
     } catch (error) {
       res.status(500).json({
         message: "На сервере произошла ошибка. Попробуйте позже",
@@ -141,7 +143,7 @@ router.post("/token", async (req, res) => {
 
     await tokenSevice.save(data._id, tokens.refreshToken);
 
-    res.status(200).send({ ...tokens, userId: data._id });
+    res.status(200).send({ ...tokens, _id: data._id });
   } catch (error) {
     res.status(500).json({
       message: "На сервере произошла ошибка. Попробуйте позже",

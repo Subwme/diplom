@@ -1,6 +1,6 @@
 import { getProductsInBasketIdListFromLocalStorage } from "../../utils/utils";
 import { getUserFromLocalStorage } from "../../utils/utils";
-import { ICategory, IProduct, IUser } from "./../../types";
+import { ICategory, IComment, IProduct, IUser } from "./../../types";
 import {
   IState,
   ActionTypes,
@@ -19,12 +19,15 @@ import {
   SetUpdateProduct,
   AddedProduct,
   ClearProductsIdInBasket,
+  SetComments,
+  AddComment,
 } from "../types";
 
 const initialState: IState = {
   user: getUserFromLocalStorage(),
   products: [],
   categories: [],
+  comments: [],
   sortBy: null,
   searchText: "",
   selectedCategoryName: null,
@@ -40,6 +43,8 @@ export const reducer = (state = initialState, action: Action): IState => {
       return { ...state, products: action.payload };
     case ActionTypes.SetCategories:
       return { ...state, categories: action.payload };
+    case ActionTypes.SetComments:
+      return { ...state, comments: action.payload };
     case ActionTypes.SetSortByAsc:
       return { ...state, sortBy: "asc" };
     case ActionTypes.SetSortByDesc:
@@ -53,7 +58,7 @@ export const reducer = (state = initialState, action: Action): IState => {
         ...state.productInBasketIdList,
         action.payload,
       ];
-      
+
       // store subscribe
       localStorage.setItem(
         "productInBasketIdList",
@@ -102,6 +107,12 @@ export const reducer = (state = initialState, action: Action): IState => {
     case ActionTypes.AddedProduct: {
       return { ...state, products: [action.payload, ...state.products] };
     }
+    case ActionTypes.AddComment: {
+      return {
+        ...state,
+        comments: [action.payload, ...state.comments],
+      };
+    }
     default:
       return state;
   }
@@ -119,6 +130,11 @@ export const setProductsAction = (payload: IProduct[]): SetProducts => ({
 
 export const setCategoriesAction = (payload: ICategory[]): SetCategories => ({
   type: ActionTypes.SetCategories,
+  payload,
+});
+
+export const setCommnetsAction = (payload: IComment[]): SetComments => ({
+  type: ActionTypes.SetComments,
   payload,
 });
 
@@ -179,6 +195,11 @@ export const setUpdateProductAction = (
 
 export const addedProductAction = (payload: IProduct): AddedProduct => ({
   type: ActionTypes.AddedProduct,
+  payload,
+});
+
+export const addedCommentAction = (payload: IComment): AddComment => ({
+  type: ActionTypes.AddComment,
   payload,
 });
 

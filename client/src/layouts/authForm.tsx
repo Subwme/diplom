@@ -35,9 +35,9 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-image">
-        <p className="auth-image-text">
+    <div className="auth">
+      <div className="image">
+        <p className="image__text">
           Компьютер — это самый удивительный инструмент, с каким я когда-либо
           сталкивался. Это велосипед для нашего сознания.
         </p>

@@ -70,11 +70,10 @@ export interface IProductData {
 
 export interface IComment {
   content: string;
-  userId: IUser["_id"];
+  userId?: IUser["_id"];
   productId: IProduct["_id"];
-  _id: string;
+  _id?: string;
 }
-
 
 // type Names = keyof AuthData;
 // type FieldsR = Record<Names, string>;

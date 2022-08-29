@@ -1,13 +1,14 @@
-import { IUser, IProduct, ICategory } from "./../types";
+import { IUser, IProduct, ICategory, IComment } from "./../types";
 
 export interface IState {
   user: IUser | null;
   products: IProduct[];
   categories: ICategory[];
+  comments: IComment[];
   sortBy: "asc" | "desc" | null;
   searchText: string;
   selectedCategoryName: string | ICategory | null;
-  productInBasketIdList: string[]
+  productInBasketIdList: string[];
   selecteEditProduct: string | null;
 }
 
@@ -26,6 +27,8 @@ export enum ActionTypes {
   SetUpdateProduct = "set-update-product",
   AddedProduct = "add-product",
   ClearProductsIdInBasket = "clear-products-in-basket",
+  SetComments = "set-comments",
+  AddComment = "add-comment",
 }
 
 export interface SetUser {
@@ -91,15 +94,26 @@ export interface AddedProduct {
   payload: IProduct;
 }
 
+export interface AddComment {
+  type: ActionTypes.AddComment;
+  payload: IComment;
+}
+
 export interface ClearProductsIdInBasket {
   type: ActionTypes.ClearProductsIdInBasket;
   payload: string[];
+}
+
+export interface SetComments {
+  type: ActionTypes.SetComments;
+  payload: IComment[];
 }
 
 export type Action =
   | SetUser
   | SetProducts
   | SetCategories
+  | SetComments
   | SetSortByAsc
   | SetSortByDesc
   | SetSearchText
@@ -110,4 +124,5 @@ export type Action =
   | SelectEditProduct
   | SetUpdateProduct
   | AddedProduct
+  | AddComment
   | ClearProductsIdInBasket;

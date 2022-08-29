@@ -1,4 +1,4 @@
-import { ProductsList } from "../layouts/ProductsList";
+import { ProductsList } from "./Product/ProductsList";
 import { CategoriesList } from "./Category/CategoriesList";
 import { useAppSelector } from "../store";
 import { useHistory } from "react-router-dom";

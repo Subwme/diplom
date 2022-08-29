@@ -32,7 +32,7 @@ export const NotFound = () => {
         >
           {user ? "Go back to main User!" : "Go back to login User!"}
           {" "}
-          {user ? <Link to="/main">Main</Link> : <Link to="/auth">Login</Link>}
+          {user ? <Link to="/">Main</Link> : <Link to="/auth">Login</Link>}
         </div>
       )}
       {user?.isAdmin && (

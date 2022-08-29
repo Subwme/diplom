@@ -1,10 +1,11 @@
 import { useParams, useHistory } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { addProductToBasketAction } from "../../store/reducers/reducer";
+import { useAppDispatch, useAppSelector } from "../store";
+import { addProductToBasketAction } from "../store/reducers/reducer";
 import { Card, Button, notification, Space, Row, Col } from "antd";
-import { NotificationType } from "../../types";
+import { NotificationType } from "../types";
 import { RollbackOutlined, ShoppingOutlined } from "@ant-design/icons";
-import "./product.css";
+import "../components/Product/product.css";
+import { CommentForm } from "../components/Form/commentForm";
 
 interface IProductId {
   productId: string;
@@ -70,6 +71,7 @@ export const ProductCard = () => {
             </Button>
           </Space>
         </Card>
+        <CommentForm productId={productId}/>
       </Col>
     </Row>
   );

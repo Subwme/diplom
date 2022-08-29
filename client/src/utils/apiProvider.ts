@@ -2,6 +2,7 @@ import jwtParse from "jwt-decode";
 import config from "./configServer.json";
 import {
   ICategory,
+  IComment,
   ILoginData,
   INewProduct,
   IProduct,
@@ -9,8 +10,9 @@ import {
   UserData,
 } from "../types";
 
+// auth
 export const login = async (content: ILoginData): Promise<IUser> => {
-  const r = await fetch(config.endPoint + "/auth/sign-inb", {
+  const r = await fetch(config.endPoint + "/auth/sign-in", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -29,7 +31,7 @@ export const login = async (content: ILoginData): Promise<IUser> => {
     throw new Error("Oops something went wrong");
   }
 
-  const { error }= json;
+  const { error } = json;
 
   if (error) {
     throw new Error("Указан неверный адрес почты");
@@ -106,6 +108,33 @@ export const deleteProduct = async (productId: string) => {
     throw new Error();
   }
   return;
+};
+
+// comments
+export const getComments = async (): Promise<IComment[]> => {
+  const r = await fetchWithToken(config.endPoint + "/comment", {
+    method: "GET",
+  });
+  return r.json();
+};
+
+export const addComment = async (comment: IComment) => {
+  const r = await fetchWithToken(config.endPoint + "/comment", {
+    method: "POST",
+    body: JSON.stringify(comment),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (r.status === 404) {
+    throw new Error("Oops something went wrong");
+  }
+
+  if (!r.ok) {
+    throw new Error();
+  }
+  return r.json();
 };
 
 const fetchWithToken = (url: string, options?: RequestInit | undefined) => {

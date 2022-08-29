@@ -62,10 +62,10 @@ export const NewLoginForm = (props: IProps) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="auth-form">
+    <form onSubmit={onSubmit} className="form">
       <h1>Магазин</h1>
       <TextField
-        classNamme="auth-email"
+        classNamme="form__email"
         label="Email"
         type="text"
         name="email"
@@ -74,7 +74,7 @@ export const NewLoginForm = (props: IProps) => {
         errors={errors.email}
       />
       <TextField
-        classNamme="auth-password"
+        classNamme="form__password"
         label="Пароль"
         type="password"
         name="password"
@@ -86,8 +86,8 @@ export const NewLoginForm = (props: IProps) => {
       <Button type="primary" htmlType="submit">
         Войти
       </Button>
-      <div className="auth-footer">
-        <p className="auth-footer-text">Еще нет аккаунта ?</p>
+      <div className="footer">
+        <p className="footer__text">Еще нет аккаунта ?</p>
         <Button onClick={() => props.handleToggleForm()} type="link">
           Зарегистрироваться
         </Button>
