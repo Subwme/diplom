@@ -50,18 +50,19 @@
 
 .form {
   width: 500px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
-  align-content: center;
   align-items: center;
   background-color: #e5e6e9;
 }
 
+.ant-btn.form__button {
+  margin-left: 0px;
+}
+
 .ant-btn {
-  margin: 10px 0 0 60px;
+  margin: 0 0 0 60px;
 }
 
 .ant-btn-primary {
@@ -69,16 +70,12 @@
   background: #40414d;
 }
 
-input#email {
-  margin: 0 0 0 32px;
-}
-
-input {
+.input {
   margin: 0 0 0 18px;
 }
 
-h1 {
-  margin: 0 0 20px 60px;
+.form__header-text {
+  margin-bottom: 20px;
 }
 
 .form__label {
@@ -86,11 +83,8 @@ h1 {
   font-weight: 600;
   color: #40414d;
   font-family: Verdana;
-}
-
-.form__username {
-  margin: 0 0 0 42px;
-  width: 190px;
+  position: absolute;
+  left: -60px;
 }
 
 .form__email,
@@ -110,7 +104,7 @@ h1 {
 .footer {
   display: flex;
   align-items: baseline;
-  margin: 0 0 0 35px;
+  margin-top: 10px;
 }
 
 .footer__text {
@@ -124,6 +118,7 @@ h1 {
 
 .form__area {
   margin: 0 0 20px 0;
+  position: relative;
 }
 
 .form__text-error {

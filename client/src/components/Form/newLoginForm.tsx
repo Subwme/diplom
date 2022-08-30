@@ -63,9 +63,9 @@ export const NewLoginForm = (props: IProps) => {
 
   return (
     <form onSubmit={onSubmit} className="form">
-      <h1>Магазин</h1>
+      <h1 className="form__header-text">Магазин</h1>
       <TextField
-        classNamme="form__email"
+        classNamme="form__email input"
         label="Email"
         type="text"
         name="email"
@@ -74,7 +74,7 @@ export const NewLoginForm = (props: IProps) => {
         errors={errors.email}
       />
       <TextField
-        classNamme="form__password"
+        classNamme="form__password input"
         label="Пароль"
         type="password"
         name="password"
@@ -83,7 +83,7 @@ export const NewLoginForm = (props: IProps) => {
         errors={errors.password}
       />
 
-      <Button type="primary" htmlType="submit">
+      <Button className="form__button" type="primary" htmlType="submit">
         Войти
       </Button>
       <div className="footer">

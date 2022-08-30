@@ -30,37 +30,37 @@ export const NewRegisterForm = (props: IProps) => {
     event.preventDefault();
 
     const newErrorMapRegister = validateRegister(props.data);
-      
-      if (Object.keys(newErrorMapRegister).length > 0) {
-        setErrors(newErrorMapRegister);
-        return;
-      }
 
-      if (props.data.password !== props.data.confirmPassword) {
-        alert("Пароли не совпадают!");
-        return;
-      }
-      const sendToData: AuthData = {
-        name: props.data.name,
-        email: props.data.email,
-        password: props.data.password,
-      };
+    if (Object.keys(newErrorMapRegister).length > 0) {
+      setErrors(newErrorMapRegister);
+      return;
+    }
 
-      register(sendToData)
-        .then((user) => {
-          dispatch(setUserAction(user));
-          history.push("/");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    if (props.data.password !== props.data.confirmPassword) {
+      alert("Пароли не совпадают!");
+      return;
+    }
+    const sendToData: AuthData = {
+      name: props.data.name,
+      email: props.data.email,
+      password: props.data.password,
+    };
+
+    register(sendToData)
+      .then((user) => {
+        dispatch(setUserAction(user));
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-  
+
   return (
     <form onSubmit={onSubmit} className="form">
-      <h1>Магазин</h1>
+      <h1 className="form__header-text">Магазин</h1>
       <TextField
-        classNamme="form__username"
+        classNamme="form__username input"
         label="Имя"
         type="text"
         name="name"
@@ -69,7 +69,7 @@ export const NewRegisterForm = (props: IProps) => {
         errors={errors.name}
       />
       <TextField
-        classNamme="form__email"
+        classNamme="form__email input"
         label="Email"
         type="text"
         name="email"
@@ -78,7 +78,7 @@ export const NewRegisterForm = (props: IProps) => {
         errors={errors.email}
       />
       <TextField
-        classNamme="form__password"
+        classNamme="form__password input"
         label="Пароль"
         type="password"
         name="password"
@@ -87,7 +87,7 @@ export const NewRegisterForm = (props: IProps) => {
         errors={errors.password}
       />
       <TextField
-        classNamme="form__confirm-password"
+        classNamme="form__confirm-password input"
         label="Пароль"
         type="password"
         name="confirmPassword"
@@ -95,7 +95,7 @@ export const NewRegisterForm = (props: IProps) => {
         onChange={props.onChange}
         errors={errors.confirmPassword}
       />
-      <Button type="primary" htmlType="submit">
+      <Button className="form__button" type="primary" htmlType="submit">
         Регистрация
       </Button>
       <div className="footer">
