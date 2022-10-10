@@ -1,18 +1,10 @@
 import { useState } from "react";
 import { NewLoginForm } from "../components/Form/newLoginForm";
 import { NewRegisterForm } from "../components/Form/newRegisterForm";
-import { IFormType, ILoginData, IRegisterData } from "../types";
+import { IFormType, ILoginData} from "../types";
 import "../components/Form/authentication.css";
 
 export type ErrorDraft = Partial<Record<keyof ILoginData, string>>;
-export type AuthData = ILoginData | IRegisterData;
-
-const initialData: AuthData = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
 
 const authFormType: IFormType = {
   authType: "login",
@@ -20,18 +12,9 @@ const authFormType: IFormType = {
 
 const AuthForm = () => {
   const [formType, setFormType] = useState(authFormType.authType);
-  const [data, setData] = useState(initialData);
-
-  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setData((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }));
-  };
 
   const handleToggleForm = () => {
     formType === "login" ? setFormType("register") : setFormType("login");
-    setData(initialData);
   };
 
   return (
@@ -45,14 +28,10 @@ const AuthForm = () => {
       <>
         {formType === "login" ? (
           <NewLoginForm
-            data={data}
-            onChange={handleChange}
             handleToggleForm={handleToggleForm}
           />
         ) : (
           <NewRegisterForm
-            data={data}
-            onChange={handleChange}
             handleToggleForm={handleToggleForm}
           />
         )}

@@ -6,12 +6,32 @@ import {
   ILoginData,
   INewProduct,
   IProduct,
+  IRegisterData,
   IUser,
   UserData,
 } from "../types";
 
-// auth
-export const login = async (content: ILoginData): Promise<IUser> => {
+type LoginError = {
+  error: {
+    email?: string;
+    password?: string;
+  };
+};
+
+type ResponseError = LoginError;
+
+type ResponseSuccess = UserData;
+
+type ResponseType = ResponseError | ResponseSuccess;
+
+export function isResError(res: ResponseType): res is ResponseError {
+  if ((res as ResponseError).error) {
+    return true;
+  }
+  return false;
+}
+
+export const login = async (content: ILoginData): Promise<ResponseType> => {
   const r = await fetch(config.endPoint + "/auth/sign-in", {
     method: "POST",
     headers: {
@@ -19,28 +39,19 @@ export const login = async (content: ILoginData): Promise<IUser> => {
     },
     body: JSON.stringify(content),
   });
-  let json;
 
-  if (r.status === 404) {
-    throw new Error("Oops something went wrong");
+  if (!r.ok) {
+    const networkError = new Error();
+    networkError.message = "На сервере произошла ошибка. Попробуйте еще раз.";
+    throw networkError;
   }
 
-  try {
-    json = await r.json();
-  } catch (error) {
-    throw new Error("Oops something went wrong");
-  }
-
-  const { error } = json;
-
-  if (error) {
-    throw new Error("Указан неверный адрес почты");
-  }
-
-  return createUserWithAuth(json);
+  return r.json();
 };
 
-export const register = async (content: ILoginData): Promise<IUser> => {
+export const register = async (
+  content: IRegisterData
+): Promise<ResponseType> => {
   const r = await fetch(config.endPoint + "/auth/sign-up", {
     method: "POST",
     headers: {
@@ -48,9 +59,14 @@ export const register = async (content: ILoginData): Promise<IUser> => {
     },
     body: JSON.stringify(content),
   });
-  const json = await r.json();
 
-  return createUserWithAuth(json);
+  if (!r.ok) {
+    const networkError = new Error();
+    networkError.message = "Network error";
+    throw networkError;
+  }
+
+  return r.json();
 };
 
 export const getCategories = async (): Promise<ICategory[]> => {
@@ -153,7 +169,7 @@ const fetchWithToken = (url: string, options?: RequestInit | undefined) => {
   });
 };
 
-const createUserWithAuth = (data: UserData): IUser => {
+export const createUserWithAuth = (data: UserData): IUser => {
   const jwtData: IUser = jwtParse(data.refreshToken);
   const user = {
     email: jwtData.email,
@@ -162,6 +178,5 @@ const createUserWithAuth = (data: UserData): IUser => {
     _id: jwtData._id,
   };
   localStorage.setItem("token", data.refreshToken);
-
   return user;
 };

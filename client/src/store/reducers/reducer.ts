@@ -21,6 +21,7 @@ import {
   ClearProductsIdInBasket,
   SetComments,
   AddComment,
+  SetErrorToPopUp,
 } from "../types";
 
 const initialState: IState = {
@@ -33,6 +34,7 @@ const initialState: IState = {
   selectedCategoryName: null,
   productInBasketIdList: getProductsInBasketIdListFromLocalStorage(),
   selecteEditProduct: null,
+  textErrorPopUp: null,
 };
 
 export const reducer = (state = initialState, action: Action): IState => {
@@ -53,6 +55,8 @@ export const reducer = (state = initialState, action: Action): IState => {
       return { ...state, searchText: action.payload };
     case ActionTypes.SetSelectedCategory:
       return { ...state, selectedCategoryName: action.payload };
+    case ActionTypes.SetErrorToPopUp:
+      return { ...state, textErrorPopUp: action.payload };
     case ActionTypes.AddProductToBasket: {
       const updatedProductInBasketIdList = [
         ...state.productInBasketIdList,
@@ -207,5 +211,10 @@ export const clearProductsIdInBasketAction = (
   payload: string[]
 ): ClearProductsIdInBasket => ({
   type: ActionTypes.ClearProductsIdInBasket,
+  payload,
+});
+
+export const setErrorTextToPopUp = (payload: string | null): SetErrorToPopUp => ({
+  type: ActionTypes.SetErrorToPopUp,
   payload,
 });

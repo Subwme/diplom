@@ -25,12 +25,11 @@ router.post("/sign-up", [
       const { email, password } = req.body;
 
       const exitingUser = await User.findOne({ email });
-
+//TODO: Валидировать регистрацию
       if (exitingUser) {
-        return res.status(400).json({
+        return res.status(200).json({
           error: {
-            message: "EMAIL_EXISTS",
-            code: 400,
+            email: "Такой email уже существует",
           },
         });
       }
@@ -79,14 +78,12 @@ router.post("/sign-in", [
       }
 
       const { email, password } = req.body;
-
       const existingUser = await User.findOne({ email });
-
+//TODO: Валидировать логин
       if (!existingUser) {
-        return res.status(400).send({
+        return res.status(200).send({
           error: {
-            message: "EMAIL_NOT_FOUND",
-            code: 400,
+            email: "Нверный Email или пароль",
           },
         });
       }
@@ -97,10 +94,9 @@ router.post("/sign-in", [
       );
 
       if (!isPasswordEqual) {
-        return res.status(400).send({
+        return res.status(200).send({
           error: {
-            message: "INVALID_PASSWORD",
-            code: 400,
+            password: "Неверный Email или пароль",
           },
         });
       }
@@ -112,9 +108,7 @@ router.post("/sign-in", [
         _id: existingUser._id,
       });
       await tokenSevice.save(existingUser._id, tokens.refreshToken);
-
       res.status(200).send({ ...tokens, _id: existingUser._id });
-      console.log(existingUser._id);
     } catch (error) {
       res.status(500).json({
         message: "На сервере произошла ошибка. Попробуйте позже",

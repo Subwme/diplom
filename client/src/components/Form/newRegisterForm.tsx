@@ -1,18 +1,28 @@
-import { Button } from "antd";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import TextField from "../../reusable/textField";
 import { useAppDispatch } from "../../store";
 import { setUserAction } from "../../store/reducers/reducer";
-import { register } from "../../utils/apiProvider";
+import {
+  createUserWithAuth,
+  isResError,
+  register,
+} from "../../utils/apiProvider";
 import { validateRegister } from "../../utils/utils";
-import { AuthData, ErrorDraft } from "../../layouts/authForm";
+import { ErrorDraft } from "../../layouts/authForm";
+import { MyButton } from "../../reusable/button";
+import { IRegisterData } from "../../types";
 
 interface IProps {
-  data: AuthData;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleToggleForm: () => void;
 }
+
+const initialData: IRegisterData = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const errorsMap: ErrorDraft = {
   name: "",
@@ -25,34 +35,51 @@ export const NewRegisterForm = (props: IProps) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const [errors, setErrors] = useState(errorsMap);
+  const [data, setData] = useState(initialData);
+
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    setData((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
+  };
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const newErrorMapRegister = validateRegister(props.data);
+    const newErrorMapRegister = validateRegister(data);
 
     if (Object.keys(newErrorMapRegister).length > 0) {
       setErrors(newErrorMapRegister);
       return;
     }
 
-    if (props.data.password !== props.data.confirmPassword) {
-      alert("Пароли не совпадают!");
+    if (data.password !== data.confirmPassword) {
       return;
     }
-    const sendToData: AuthData = {
-      name: props.data.name,
-      email: props.data.email,
-      password: props.data.password,
+
+    const sendToData: IRegisterData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
     };
 
     register(sendToData)
-      .then((user) => {
+      .then((data) => {
+        if (isResError(data)) {
+          setErrors({ ...errors, ...data.error });
+          return;
+        }
+        const user = createUserWithAuth(data);
         dispatch(setUserAction(user));
-        history.push("/");
+        history.replace("/");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e: Error) => {
+        if (e.name === "Network error") {
+          history.push("/404");
+          return;
+        }
+        setErrors({ ...errors, email: e.message });
       });
   };
 
@@ -64,8 +91,8 @@ export const NewRegisterForm = (props: IProps) => {
         label="Имя"
         type="text"
         name="name"
-        value={props.data.name}
-        onChange={props.onChange}
+        value={data.name}
+        onChange={handleChange}
         errors={errors.name}
       />
       <TextField
@@ -73,8 +100,8 @@ export const NewRegisterForm = (props: IProps) => {
         label="Email"
         type="text"
         name="email"
-        value={props.data.email}
-        onChange={props.onChange}
+        value={data.email}
+        onChange={handleChange}
         errors={errors.email}
       />
       <TextField
@@ -82,8 +109,8 @@ export const NewRegisterForm = (props: IProps) => {
         label="Пароль"
         type="password"
         name="password"
-        value={props.data.password}
-        onChange={props.onChange}
+        value={data.password}
+        onChange={handleChange}
         errors={errors.password}
       />
       <TextField
@@ -91,18 +118,23 @@ export const NewRegisterForm = (props: IProps) => {
         label="Пароль"
         type="password"
         name="confirmPassword"
-        value={props.data.confirmPassword}
-        onChange={props.onChange}
+        value={data.confirmPassword}
+        onChange={handleChange}
         errors={errors.confirmPassword}
       />
-      <Button className="form__button" type="primary" htmlType="submit">
-        Регистрация
-      </Button>
+      <MyButton
+        className="form__button button_size_m button_active button_hovered"
+        type="submit"
+        text="Регистрация"
+      />
       <div className="footer">
         <p className="footer__text">Уже есть аккаунт ?</p>
-        <Button onClick={() => props.handleToggleForm()} type="link">
-          Войти
-        </Button>
+        <MyButton
+          className="form__button-link button_active"
+          onClick={() => props.handleToggleForm()}
+          type="button"
+          text="Войти"
+        />
       </div>
     </form>
   );

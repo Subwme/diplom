@@ -11,6 +11,7 @@ import { IProduct } from "../../types";
 import "./Adminpanel.css";
 import { useHistory } from "react-router-dom";
 
+
 const blank: IProduct = {
   description: "",
   _id: "",

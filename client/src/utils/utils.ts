@@ -1,6 +1,5 @@
 import { ILoginData, IRegisterData, IUser } from "../types";
 import jwtParse from "jwt-decode";
-import { AuthData } from "../layouts/authForm";
 
 export const getUserFromLocalStorage = (): IUser | null => {
   const token = localStorage.getItem("token");
@@ -40,6 +39,7 @@ const validateConfig = {
   password: {
     count: passwordCount,
     require: passwordRequire,
+    noMatchPassword: () => alert("Пароли не совпадают!"),
   },
 };
 
@@ -67,7 +67,9 @@ export function validateLogin(content: ILoginData): ErrorMap<ILoginData> {
   return errors;
 }
 
-export function validateRegister(content: AuthData): ErrorMap<IRegisterData> {
+export function validateRegister(
+  content: IRegisterData
+): ErrorMap<IRegisterData> {
   const errors: ErrorMap<IRegisterData> = {};
 
   if (content.name === "") {
@@ -103,6 +105,10 @@ export function validateRegister(content: AuthData): ErrorMap<IRegisterData> {
     content.confirmPassword.length < minLengthPassword
   ) {
     errors.confirmPassword = validateConfig.password.count;
+  }
+
+  if (content.password !== content.confirmPassword) {
+    validateConfig.password.noMatchPassword();
   }
 
   return errors;

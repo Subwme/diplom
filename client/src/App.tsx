@@ -19,6 +19,7 @@ import "./style.css";
 import "antd/dist/antd.min.css";
 import AuthForm from "./layouts/authForm";
 import { NotFound } from "./layouts/notFound";
+import { ErrorPopup } from "./reusable/errorPopup";
 
 const { Content } = Layout;
 
@@ -45,6 +46,7 @@ const App = () => {
   return (
     <Layout>
       <Content>
+        <ErrorPopup timer={111115000}/>
         <NavigationBar user={user} />
         <Switch>
           <Route path="/" exact component={Main} />

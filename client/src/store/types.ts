@@ -10,6 +10,7 @@ export interface IState {
   selectedCategoryName: string | ICategory | null;
   productInBasketIdList: string[];
   selecteEditProduct: string | null;
+  textErrorPopUp: string | null;
 }
 
 export enum ActionTypes {
@@ -19,6 +20,7 @@ export enum ActionTypes {
   SetSortByAsc = "set-sort-by-asc",
   SetSortByDesc = "set-sort-by-desc",
   SetSearchText = "set-search-text",
+  SetErrorToPopUp = "set-text-error-to-popup",
   SetSelectedCategory = "set-selected-category",
   AddProductToBasket = "add-product-to-basket",
   RemoveProductFromBasket = "remove-product-from-basket",
@@ -109,6 +111,11 @@ export interface SetComments {
   payload: IComment[];
 }
 
+export interface SetErrorToPopUp {
+  type: ActionTypes.SetErrorToPopUp;
+  payload: string | null;
+}
+
 export type Action =
   | SetUser
   | SetProducts
@@ -125,4 +132,5 @@ export type Action =
   | SetUpdateProduct
   | AddedProduct
   | AddComment
-  | ClearProductsIdInBasket;
+  | ClearProductsIdInBasket
+  | SetErrorToPopUp;
