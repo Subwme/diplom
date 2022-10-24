@@ -46,7 +46,7 @@ const App = () => {
   return (
     <Layout>
       <Content>
-        <ErrorPopup timer={111115000}/>
+        <ErrorPopup time={5000}/>
         <NavigationBar user={user} />
         <Switch>
           <Route path="/" exact component={Main} />

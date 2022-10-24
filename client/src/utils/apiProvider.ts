@@ -42,7 +42,7 @@ export const login = async (content: ILoginData): Promise<ResponseType> => {
 
   if (!r.ok) {
     const networkError = new Error();
-    networkError.message = "На сервере произошла ошибка. Попробуйте еще раз.";
+    networkError.message = "Что-то пошло не так. Попробуйте еще раз.";
     throw networkError;
   }
 

@@ -73,8 +73,6 @@ export const NewLoginForm = (props: IProps) => {
         }
       })
       .catch((e: Error) => {
-        console.log(e);
-        
         dispatch(setErrorTextToPopUp(e.message));
         return;
       });

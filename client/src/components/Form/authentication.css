@@ -33,7 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("https://img5.goodfon.ru/original/1920x1080/d/e3/jordan-mcgee-lodka-voda-krysha.jpg");
+  background-image: url("https://s1.1zoom.ru/big0/620/414170-FAKIR.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -79,6 +79,7 @@
   background: #40414d;
   border-color: #40414d;
   color: white;
+  margin-top: 10px;
 }
 
 .form__button-link {
@@ -114,6 +115,8 @@
   position: fixed;
   z-index: 1010;
   margin-right: 24px;
+  transition: all 0.5s;
+  opacity: 0;
 }
 
 .popup__content {
@@ -156,21 +159,7 @@
 }
 
 .popup_active {
-  opacity: 0;
-  animation: popup 0.5s forwards;
-}
-
-.popup_inactive {
-  opacity: 0;
-}
-
-@keyframes popup {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  opacity: 1;
 }
 
 .form__button-link:hover {
@@ -221,12 +210,18 @@
 }
 
 .form__area {
-  margin: 0 0 20px 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
   position: relative;
 }
 
 .form__text-error {
   display: block;
-  margin: 0;
-  color: red;
+  position: fixed;
+  color: #ff4949;
+  margin-top: 25px;
+  margin-left: 20px;
+  font-family: sans-serif;
+  font-weight: bolder;
 }

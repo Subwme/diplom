@@ -21,11 +21,11 @@ const minLengthName = 3;
 const minLengthPassword = 6;
 const emailRegExp = /@/;
 const nameCount = `Минимальная длина имени ${minLengthName} символа`;
-const nameRequire = "Имя обязательно для заполнения";
+const nameRequire = "Укажите имя";
 const passwordCount = `Минимальная длина пароля ${minLengthPassword} символов`;
-const passwordRequire = "Пароль обязателен для заполнения";
+const passwordRequire = "Укажите пароль";
 const isEmailCondition = "Введите корректный Email";
-const emailRequire = "Email обязателен для заполнения";
+const emailRequire = "Введите Email";
 
 const validateConfig = {
   name: {

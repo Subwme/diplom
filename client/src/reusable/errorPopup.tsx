@@ -4,26 +4,35 @@ import {
   ExclamationCircleOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 
-export const ErrorPopup = ({ timer }: { timer: number }) => {
+export const ErrorPopup = ({ time }: { time: number }) => {
+  const [active, setActive] = useState(false);
   const dispatch = useAppDispatch();
-  const isErrorTextInPopup = useAppSelector((state) => state.textErrorPopUp);
+  const errorText = useAppSelector((state) => state.textErrorPopUp);
+
+  useEffect(() => {
+    if (errorText) {
+      setActive(true);
+      const timer = setTimeout(handleClosePopup, time);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [errorText, time]);
 
   const handleClosePopup = () => {
-    dispatch(setErrorTextToPopUp(null));
+    setActive(false);
   };
-
-  if (isErrorTextInPopup) {
-    setTimeout(() => {
-      dispatch(setErrorTextToPopUp(null));
-    }, timer);
-  }
 
   return (
     <div
-      className={`popup ${
-        isErrorTextInPopup ? "popup_active " : "popup_inactive"
-      }`}
+      onTransitionEnd={() => {
+        if (!active) {
+          dispatch(setErrorTextToPopUp(null));
+        }
+      }}
+      className={`popup ${active ? "popup_active" : ""}`}
     >
       <div className="popup__content">
         <div className="popup__icons">
@@ -36,7 +45,7 @@ export const ErrorPopup = ({ timer }: { timer: number }) => {
             className="popup__close_icon"
           />
         </div>
-        <p className="popup__text">{isErrorTextInPopup}</p>
+        <p className="popup__text">{errorText || " "}</p>
       </div>
     </div>
   );

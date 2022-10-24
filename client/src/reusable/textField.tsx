@@ -32,6 +32,7 @@ const TextField = ({
         name={name}
         value={value}
         onChange={onChange}
+        
       />
       <p className="form__text-error">{errors ? errors : false}</p>
     </div>
