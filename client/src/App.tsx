@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
-import { NavigationBar } from "./components/NavigationBar";
-import { Main } from "./components/Main";
-import { ProductCard } from "./layouts/ProductCard";
+import { NavigationBar } from "./components/NavigationBar/NavigationBar";
+import { Main } from "./Pages/Main/Main";
+import { ProductCard } from "./Pages/ProductCard/ProductCard";
 import { useAppDispatch, useAppSelector } from "./store";
 import { getCategories, getComments, getProducts } from "./utils/apiProvider";
 import { useEffect } from "react";
@@ -10,16 +10,15 @@ import {
   setCategoriesAction,
   setCommnetsAction,
 } from "./store/reducers/reducer";
-import { Basket } from "./layouts/Basket";
-import { AdminPanel } from "./layouts/AdminPanel";
+import { Basket } from "./Pages/Basket/Basket";
+import { AdminPanel } from "./Pages/AdminPanel/AdminPanel";
 import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
 import { Layout } from "antd";
-
 import "./style.css";
 import "antd/dist/antd.min.css";
-import AuthForm from "./layouts/authForm";
-import { NotFound } from "./layouts/notFound";
-import { ErrorPopup } from "./reusable/errorPopup";
+import { NotFound } from "./Pages/NotFound/notFound";
+import { ErrorPopup } from "./components/ErrorPopup/errorPopup";
+import { AuthForm } from "./Pages/AuthPage/";
 
 const { Content } = Layout;
 
@@ -46,7 +45,7 @@ const App = () => {
   return (
     <Layout>
       <Content>
-        <ErrorPopup time={5000}/>
+        <ErrorPopup time={5000} />
         <NavigationBar user={user} />
         <Switch>
           <Route path="/" exact component={Main} />

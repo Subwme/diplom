@@ -1,0 +1,52 @@
+.form__email,
+.form__password,
+.form__username,
+.form__confirm-password {
+  border-radius: 2px;
+  font-family: Verdana;
+  border: none;
+  outline: none;
+}
+
+.form__confirm-password {
+  margin: 0 0 0 20px;
+}
+
+.form__area {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #40414d;
+  font-family: Verdana;
+  position: absolute;
+  left: -60px;
+}
+
+.form__text-error {
+  display: block;
+  position: fixed;
+  color: #ff4949;
+  margin-top: 25px;
+  margin-left: 20px;
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+
+.input {
+  margin: 0 0 0 18px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.219);
+}
+
+
+
