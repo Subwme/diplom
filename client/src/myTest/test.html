@@ -1,43 +1,12 @@
-//CSS СЕЛЕКТОРЫ //ВЕС СЕЛЕКТОРОВ //деструктуризация
-
-1. form - html+css (reg, sign)
-2. erros
-3. mobile version
-4. useState
-
-СТРУКТУРА:
-
-1. Components -> компоненты которые используется больше 1 раза, hoc
-2. pages / views -> страницы
+todo
+1. резеты CSS
+2. использовать css переменные
+3. rem, em вместо px для шрифта.
+4. mobile firts css
+5. зафиксировать левую часть и скролить форму как страницу
 
 
-components
-  TextField
-    TextField.tsx -> код компонента
-    index.ts -> импорт (export {TextField} from "./TextField" )
-    TextField.css
-pages
-  LoginPage
-    LoginPage.tsx 
-    LoginPage.css
-    index.ts 
-    components 
-      LoginForm.tsx 
-      RegisterForm.tsx
-    utils
-      utils.ts
+подложка прозрачная для формы и текста и уменьшить текст на мобилке
+избавиться от position absolute - label, нельзя использовать в основном контенте
+ 
 
-modal
-
-1. Начальное состояние оишбки = null
-2. если ошибка = null - не показываем попап, иначе показываем + таймер и сетим null
-3. Если произошла ошибка нетворка/сервера сетим текст ошибки в попап
-4. добавить элемент закрытия попап
-
-подписываемся на состояние текста ошибки в попапе в App
-isTextErrorPopUp ? ErrorPopUp : false
-
-таймер
-if(isTextErrorPopUp) {
-  setTimeout(setTextErrorPopUp(null), 5000)
-}

@@ -13,14 +13,14 @@ import {
 import { Basket } from "./Pages/Basket/Basket";
 import { AdminPanel } from "./Pages/AdminPanel/AdminPanel";
 import { ProtectedRoute } from "./components/hoc/ProtectedRoute";
-import { Layout } from "antd";
+// import { Layout } from "antd";
 import "./style.css";
-import "antd/dist/antd.min.css";
+// import "antd/dist/antd.min.css";
 import { NotFound } from "./Pages/NotFound/notFound";
 import { ErrorPopup } from "./components/ErrorPopup/errorPopup";
 import { AuthForm } from "./Pages/AuthPage/";
 
-const { Content } = Layout;
+// const { Content } = Layout;
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -43,23 +43,21 @@ const App = () => {
   }, [dispatch, user]);
 
   return (
-    <Layout>
-      <Content>
-        <ErrorPopup time={5000} />
-        <NavigationBar user={user} />
-        <Switch>
-          <Route path="/" exact component={Main} />
-          <Route path="/product/:productId" component={ProductCard} />
-          <ProtectedRoute path="/admin">
-            <AdminPanel />
-          </ProtectedRoute>
-          <Route path="/auth" exact component={AuthForm} />
-          <Route path="/basket" component={Basket} />
-          <Route path="/404" component={NotFound} />
-          <Route component={NotFound} />
-        </Switch>
-      </Content>
-    </Layout>
+    <>
+      <ErrorPopup time={5000} />
+      <NavigationBar user={user} />
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/product/:productId" component={ProductCard} />
+        <ProtectedRoute path="/admin">
+          <AdminPanel />
+        </ProtectedRoute>
+        <Route path="/auth" exact component={AuthForm} />
+        <Route path="/basket" component={Basket} />
+        <Route path="/404" component={NotFound} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 };
 

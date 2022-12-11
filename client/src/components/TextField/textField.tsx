@@ -5,6 +5,7 @@ interface ITextFieldProps {
   label: string;
   type: string;
   name: string;
+  placeHolder: string;
   value?: string;
   classNamme: string;
   errors?: string;
@@ -15,6 +16,7 @@ export const TextField = ({
   label,
   type,
   name,
+  placeHolder,
   value,
   classNamme,
   errors,
@@ -33,7 +35,7 @@ export const TextField = ({
         name={name}
         value={value}
         onChange={onChange}
-        
+        placeholder={placeHolder}
       />
       <p className="form__text-error">{errors ? errors : false}</p>
     </div>

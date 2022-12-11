@@ -3,7 +3,7 @@ export interface ValueContainer<T> {
 }
 
 type ErrorContainer = ValueContainer<string>;
-type DataFromForm = ErrorContainer
+type DataFromForm = ErrorContainer;
 
 const mapLogin: DataFromForm = {
   name: "name",
@@ -22,20 +22,21 @@ const errorMapFrom: ErrorContainer = {
   password: "ErrorMessage",
 };
 
-
 function validate<T extends ErrorContainer>(content: T): ErrorContainer {
   if (content.name === "") {
-    errorMapFrom.name = "NEW ERROR"
+    errorMapFrom.name = "NEW ERROR";
   }
   if (content.password === "") {
-    errorMapFrom.password = "NEW ERROR"
+    errorMapFrom.password = "NEW ERROR";
   }
 
   if (content.email?.length === 0) {
-    errorMapFrom.email = "NEW ERROR"
+    errorMapFrom.email = "NEW ERROR";
   }
-  return errorMapFrom
+  return errorMapFrom;
 }
 
 validate<ErrorContainer>(mapLogin);
 validate<ErrorContainer>(mapReg);
+
+

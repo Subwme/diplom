@@ -83,13 +83,18 @@ export const LoginForm = (props: IProps) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="form">
+    <form onSubmit={onSubmit} className="form form_style">
+      <p className="image__text text_filter mobile_form-text_hide">
+        Компьютер — это самый удивительный инструмент, с каким я когда-либо
+        сталкивался. Это велосипед для нашего сознания.
+      </p>
       <h1 className="form__header-text">Магазин</h1>
       <TextField
         classNamme="form__email input"
         label="Email"
         type="text"
         name="email"
+        placeHolder="введите email..."
         value={data.email}
         onChange={handleChange}
         errors={errors.email}
@@ -99,6 +104,7 @@ export const LoginForm = (props: IProps) => {
         label="Пароль"
         type="password"
         name="password"
+        placeHolder="введите пароль..."
         value={data.password}
         onChange={handleChange}
         errors={errors.password}

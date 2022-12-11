@@ -1,4 +1,4 @@
-.ant-card-head-title {
+/* .ant-card-head-title {
   text-align: center;
   font-family: sans-serif;
   font-size: 20px;
@@ -33,9 +33,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("https://s1.1zoom.ru/big0/620/414170-FAKIR.jpg");
+  background-image: url("https://img.freepik.com/free-photo/mount-mont-blanc-covered-snow-reflecting-water-evening-chamonix-france_181624-33408.jpg?w=1480&t=st=1669247231~exp=1669247831~hmac=0637e0fea95bca83a8a58289ae9b966a2d11719d98d6ea272060f6f166669318");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   width: 100%;
 }
 
@@ -44,7 +45,7 @@
   color: white;
   font-size: 45px;
   font-weight: 600;
-  font-family: cursive;
+  font-family: "Jost", sans-serif;
   text-align: center;
 }
 
@@ -54,7 +55,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #e5e6e9;
+  background-color: #bbbacfb5;
 }
 
 .ant-btn {
@@ -68,7 +69,7 @@
 
 .form__header-text {
   margin-bottom: 20px;
-  font-family: Verdana;
+  font-family: "Jost", sans-serif;
 }
 
 .footer {
@@ -80,9 +81,192 @@
 .footer__text {
   display: block;
   margin: 0 -55px 0 0;
-  font-size: 12px;
   font-weight: 600;
   color: #40414d;
-  font-family: Verdana;
+  font-family: "Jost", sans-serif;
 }
 
+.mobile_form-text_hide {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .image {
+    display: none;
+  }
+  .form {
+    background-image: url("https://img.freepik.com/free-photo/mount-mont-blanc-covered-snow-reflecting-water-evening-chamonix-france_181624-33408.jpg?w=1480&t=st=1669247231~exp=1669247831~hmac=0637e0fea95bca83a8a58289ae9b966a2d11719d98d6ea272060f6f166669318");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .form__header-text {
+    color: white;
+  }
+  .form__text-error {
+    color: #ff2733;
+  }
+  .form__button {
+    background-color: #142c4f;
+  }
+  .footer__text {
+    color: #c3c3c3;
+  }
+  .mobile_form-text_hide {
+    display: block;
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 576px) {
+  .form__area {
+    justify-content: center;
+    margin-bottom: 47px;
+  }
+  .form__label {
+    left: 18px;
+    top: -22px;
+  }
+  .form__button {
+    margin-top: -20px;
+  }
+}
+
+@media (max-height: 400px) {
+  .image__text {
+    font-size: 30px;
+  }
+  .footer {
+    margin-top: 0;
+  }
+  .form__button {
+    margin-left: 20px;
+    margin-top: 0px;
+  }
+  .button_size_m {
+    padding: 2px 8px;
+}
+.form__label {
+  left: -38px;
+  top: 0px;
+}
+.form__area {
+  margin-bottom: 25px;
+}
+} */
+.auth {
+  --white: #fff;
+}
+.image {
+  display: none;
+}
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url("https://img.freepik.com/free-photo/mount-mont-blanc-covered-snow-reflecting-water-evening-chamonix-france_181624-33408.jpg?w=1480&t=st=1669247231~exp=1669247831~hmac=0637e0fea95bca83a8a58289ae9b966a2d11719d98d6ea272060f6f166669318");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-family: "Jost", sans-serif;
+}
+.image__text {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--white);
+}
+.form__header-text {
+  display: block;
+  text-align: center;
+  color: var(--white);
+  font-size: 24px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form_style {
+  background-color: #132138b3;
+  margin: 10px;
+  border-radius: 6px;
+  padding: 10px;
+}
+.form__button {
+  background-color: #112543;
+}
+
+.footer {
+  display: flex;
+  align-items: baseline;
+  margin-top: 10px;
+}
+.footer__text {
+  display: block;
+  color: #c3c3c3;
+}
+
+@media screen and (min-width: 767px) {
+  .auth {
+    align-items: center;
+    padding: 0 150px;
+    --regular-size-text: 1.2rem;
+  }
+  .image__text {
+    font-size: var(--regular-size-text);
+  }
+  .form__header-text {
+    font-size: 1.9rem;
+  }
+  .footer__text {
+    font-size: var(--regular-size-text);
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .auth {
+    flex-direction: unset;
+    justify-content: start;
+    background-image: none;
+    padding: 0;
+    background-color: #bbbacfb5;
+  }
+  .image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url(https://img.freepik.com/free-photo/mount-mont-blanc-covered-snow-reflecting-water-evening-chamonix-france_181624-33408.jpg?w=1480&t=st=1669247231~exp=1669247831~hmac=0637e0f…);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+  }
+
+  .image__text {
+    font-size: 3rem;
+  }
+  .form {
+    width: 550px;
+  }
+  .form_style {
+    background-color: #33456ffc;
+    margin: 0 3rem;
+  }
+  .form__text-error {
+    margin-top: 38px;
+  }
+  .footer__text {
+    font-size: 1rem;
+  }
+  .mobile_form-text_hide {
+    display: none;
+  }
+  .footer__text {
+    color: var(--white);
+  }
+}
